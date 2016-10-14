@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Author" EntityType="EFRecipesModel.Store.Author" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="AuthorBook" EntityType="EFRecipesModel.Store.AuthorBook" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="Book" EntityType="EFRecipesModel.Store.Book" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="vwAuthorBook" EntityType="EFRecipesModel.Store.vwAuthorBook" store:Type="Views" store:Schema="Chapter15" store:Name="vwAuthorBook">
+            <DefiningQuery>SELECT 
+      [vwAuthorBook].[BookId] AS [BookId], 
+      [vwAuthorBook].[AuthorId] AS [AuthorId]
+      FROM [Chapter15].[vwAuthorBook] AS [vwAuthorBook]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AuthorBook_Author" Association="EFRecipesModel.Store.FK_AuthorBook_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="AuthorBook" EntitySet="AuthorBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AuthorBook_Book" Association="EFRecipesModel.Store.FK_AuthorBook_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="AuthorBook" EntitySet="AuthorBook" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="AuthorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AuthorBook">
+          <Key>
+            <PropertyRef Name="BookId" />
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="IsPrimary" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ISBN" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'EFRecipes.Chapter15.vwAuthorBook' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vwAuthorBook">
+          <Key>
+            <PropertyRef Name="BookId" />
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AuthorBook_Author">
+          <End Role="Author" Type="EFRecipesModel.Store.Author" Multiplicity="1" />
+          <End Role="AuthorBook" Type="EFRecipesModel.Store.AuthorBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="AuthorId" />
+            </Principal>
+            <Dependent Role="AuthorBook">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AuthorBook_Book">
+          <End Role="Book" Type="EFRecipesModel.Store.Book" Multiplicity="1" />
+          <End Role="AuthorBook" Type="EFRecipesModel.Store.AuthorBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookId" />
+            </Principal>
+            <Dependent Role="AuthorBook">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Authors" EntityType="EFRecipesModel.Author" />
+          <EntitySet Name="AuthorBooks" EntityType="EFRecipesModel.AuthorBook" />
+          <EntitySet Name="Books" EntityType="EFRecipesModel.Book" />
+          <AssociationSet Name="FK_AuthorBook_Author" Association="EFRecipesModel.FK_AuthorBook_Author">
+            <End Role="Author" EntitySet="Authors" />
+            <End Role="AuthorBook" EntitySet="AuthorBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AuthorBook_Book" Association="EFRecipesModel.FK_AuthorBook_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="AuthorBook" EntitySet="AuthorBooks" />
+          </AssociationSet>
+          <AssociationSet Name="AuthorBook1" Association="EFRecipesModel.AuthorBook1">
+            <End Role="Author" EntitySet="Authors" />
+            <End Role="Book" EntitySet="Books" /></AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="AuthorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="AuthorBooks" Relationship="EFRecipesModel.FK_AuthorBook_Author" FromRole="Author" ToRole="AuthorBook" />
+          <NavigationProperty Name="Books" Relationship="EFRecipesModel.AuthorBook1" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="AuthorBook">
+          <Key>
+            <PropertyRef Name="BookId" />
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Author" Relationship="EFRecipesModel.FK_AuthorBook_Author" FromRole="AuthorBook" ToRole="Author" />
+          <NavigationProperty Name="Book" Relationship="EFRecipesModel.FK_AuthorBook_Book" FromRole="AuthorBook" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ISBN" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="AuthorBooks" Relationship="EFRecipesModel.FK_AuthorBook_Book" FromRole="Book" ToRole="AuthorBook" />
+          <NavigationProperty Name="Authors" Relationship="EFRecipesModel.AuthorBook1" FromRole="Book" ToRole="Author" />
+        </EntityType>
+        <Association Name="FK_AuthorBook_Author">
+          <End Role="Author" Type="EFRecipesModel.Author" Multiplicity="1" />
+          <End Role="AuthorBook" Type="EFRecipesModel.AuthorBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="AuthorId" />
+            </Principal>
+            <Dependent Role="AuthorBook">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AuthorBook_Book">
+          <End Role="Book" Type="EFRecipesModel.Book" Multiplicity="1" />
+          <End Role="AuthorBook" Type="EFRecipesModel.AuthorBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookId" />
+            </Principal>
+            <Dependent Role="AuthorBook">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AuthorBook1">
+          <End Type="EFRecipesModel.Author" Role="Author" Multiplicity="*" />
+          <End Type="EFRecipesModel.Book" Role="Book" Multiplicity="*" /></Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Author)">
+              <MappingFragment StoreEntitySet="Author">
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="AuthorBooks">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.AuthorBook)">
+              <MappingFragment StoreEntitySet="AuthorBook">
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Book)">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Title" ColumnName="Title" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="AuthorBook1" TypeName="EFRecipesModel.AuthorBook1" StoreEntitySet="vwAuthorBook">
+            <EndProperty Name="Book">
+              <ScalarProperty Name="BookId" ColumnName="BookId" /></EndProperty>
+            <EndProperty Name="Author">
+              <ScalarProperty Name="AuthorId" ColumnName="AuthorId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe6">
+        <EntityTypeShape EntityType="EFRecipesModel.Author" Width="1.5" PointX="4.375" PointY="1" Height="1.7879850260416661" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.AuthorBook" Width="1.5" PointX="7.125" PointY="2.25" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Book" Width="1.5" PointX="4.375" PointY="3.625" Height="1.9802864583333331" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_AuthorBook_Author" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.875" PointY="2.5189925130208328" />
+          <ConnectorPoint PointX="7.125" PointY="2.5189925130208328" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.FK_AuthorBook_Book" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.875" PointY="3.9276432291666667" />
+          <ConnectorPoint PointX="7.125" PointY="3.9276432291666667" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.AuthorBook1">
+          <ConnectorPoint PointX="5.125" PointY="2.7879850260416661" />
+          <ConnectorPoint PointX="5.125" PointY="3.625" />
+          </AssociationConnector>
+        </Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

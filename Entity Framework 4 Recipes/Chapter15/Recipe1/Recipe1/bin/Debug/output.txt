@@ -1,0 +1,7 @@
+All Contacts
+============
+Stacy Jones 867-5301
+Bill Waters 907-2212
+Just Customers
+	Bill Waters 907-2212 (Balance: $99.34)
+Press <enter> to continue...

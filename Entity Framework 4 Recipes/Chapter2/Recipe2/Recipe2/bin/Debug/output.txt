@@ -1,0 +1,16 @@
+Lord Byron
+	Don Juan (Anapestic Tetrameter)
+Lewis Carroll
+	The Hunting of the Shark (Anapestic Tetrameter)
+John Milton
+	Paradise Regained (Iambic Pentameter)
+	Paradise Lost (Iambic Pentameter)
+Lewis Carroll
+	The Hunting of the Shark (Anapestic Tetrameter)
+Lord Byron
+	Don Juan (Anapestic Tetrameter)
+John Milton
+	Paradise Regained (Iambic Pentameter)
+John Milton
+	Paradise Lost (Iambic Pentameter)
+Press <enter> to continue...

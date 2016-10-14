@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="DVD" EntityType="EFRecipesModel.Store.DVD" store:Type="Tables" Schema="Chapter10" />
+          <EntitySet Name="Magazine" EntityType="EFRecipesModel.Store.Magazine" store:Type="Tables" Schema="Chapter10" />
+          <EntitySet Name="Media" EntityType="EFRecipesModel.Store.Media" store:Type="Tables" Schema="Chapter10" />
+          <AssociationSet Name="FK_DVD_Media" Association="EFRecipesModel.Store.FK_DVD_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="DVD" EntitySet="DVD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Magazine_Media" Association="EFRecipesModel.Store.FK_Magazine_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Magazine" EntitySet="Magazine" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="DVD">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" />
+          <Property Name="PlayTime" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Magazine">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" />
+          <Property Name="PublicationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_DVD_Media">
+          <End Role="Media" Type="EFRecipesModel.Store.Media" Multiplicity="1" />
+          <End Role="DVD" Type="EFRecipesModel.Store.DVD" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="DVD">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Magazine_Media">
+          <End Role="Media" Type="EFRecipesModel.Store.Media" Multiplicity="1" />
+          <End Role="Magazine" Type="EFRecipesModel.Store.Magazine" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Magazine">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAllMedia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter10" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MediaSet" EntityType="EFRecipesModel.Media" />
+<FunctionImport Name="GetAllMedia" EntitySet="MediaSet" ReturnType="Collection(EFRecipesModel.Media)" />
+        </EntityContainer>
+        <EntityType Name="DVD" BaseType="EFRecipesModel.Media">
+          <Property Name="PlayTime" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Magazine" BaseType="EFRecipesModel.Media">
+          <Property Name="PublicationDate" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="MediaSet">
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Media)">
+<MappingFragment StoreEntitySet="Media">
+<ScalarProperty Name="MediaId" ColumnName="MediaId" />
+<ScalarProperty Name="Title" ColumnName="Title" /></MappingFragment></EntityTypeMapping>
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.DVD)">
+<MappingFragment StoreEntitySet="DVD">
+<ScalarProperty Name="MediaId" ColumnName="MediaId" />
+<ScalarProperty Name="PlayTime" ColumnName="PlayTime" />
+</MappingFragment></EntityTypeMapping>
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Magazine)">
+<MappingFragment StoreEntitySet="Magazine">
+<ScalarProperty Name="MediaId" ColumnName="MediaId" />
+<ScalarProperty Name="PublicationDate" ColumnName="PublicationDate" />
+</MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllMedia" FunctionName="EFRecipesModel.Store.GetAllMedia">
+            <ResultMapping>
+              <EntityTypeMapping TypeName="EFRecipesModel.Magazine">
+                <ScalarProperty ColumnName="PublicationDate" Name="PublicationDate"/>
+                <Condition ColumnName="MediaType" Value="Magazine"/>
+              </EntityTypeMapping>
+              <EntityTypeMapping TypeName="EFRecipesModel.DVD">
+                <ScalarProperty ColumnName="PlayTime" Name="PlayTime"/>
+                <Condition ColumnName="MediaType" Value="DVD"/>
+              </EntityTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+<Diagram Name="Recipe6">
+<EntityTypeShape EntityType="EFRecipesModel.DVD" Width="1.5" PointX="5.25" PointY="3.375" Height="1.2110807291666665" IsExpanded="true" />
+<EntityTypeShape EntityType="EFRecipesModel.Magazine" Width="1.5" PointX="3.25" PointY="3.375" Height="1.2110807291666665" IsExpanded="true" />
+<EntityTypeShape EntityType="EFRecipesModel.Media" Width="1.5" PointX="4.25" PointY="0.75" Height="1.7879850260416665" IsExpanded="true" />
+<InheritanceConnector EntityType="EFRecipesModel.DVD">
+<ConnectorPoint PointX="5" PointY="2.1533821614583331" />
+<ConnectorPoint PointX="5" PointY="3" />
+<ConnectorPoint PointX="6" PointY="3" />
+<ConnectorPoint PointX="6" PointY="3.375" />
+</InheritanceConnector>
+<InheritanceConnector EntityType="EFRecipesModel.Magazine">
+<ConnectorPoint PointX="5" PointY="2.1533821614583331" />
+<ConnectorPoint PointX="5" PointY="3" />
+<ConnectorPoint PointX="4" PointY="3" />
+<ConnectorPoint PointX="4" PointY="3.375" />
+</InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="4ab7bb5b-f3f7-463a-9993-a3a53ee34fb2" name="ltenny@INSANE 2010-03-21 13:46:33" runUser="insane\ltenny" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="ef69b125-3259-43eb-8030-7cf59d5f2b24">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="ltenny_INSANE 2010-03-21 13_46_33" />
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2010-03-21T13:46:33.8779625-05:00" queuing="2010-03-21T13:46:35.4730537-05:00" start="2010-03-21T13:46:35.6310627-05:00" finish="2010-03-21T13:47:33.1193509-05:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="3" executed="2" error="0" failed="1" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="1" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="INSANE" outcome="Error" timestamp="2010-03-21T13:47:33.1173507-05:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestForArrivalDateGreaterThanDepartureDate" storage="m:\book work\code\chapter8\recipe8\tests\bin\debug\tests.dll" id="b57ca660-0fb3-a788-682d-22c7c53c2c94">
+      <Execution id="a41ba293-b468-4225-b442-2f8ab04e809c" />
+      <TestMethod codeBase="M:/Book Work/Code/Chapter8/Recipe8/Tests/bin/Debug/Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Tests.ReservationTest, Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForArrivalDateGreaterThanDepartureDate" />
+    </UnitTest>
+    <UnitTest name="TestForDuplicateReservation" storage="m:\book work\code\chapter8\recipe8\tests\bin\debug\tests.dll" id="11f23460-0a16-f372-3438-da565d0b5ca1">
+      <Execution id="b7c14fec-faaa-4e97-8f53-bf7b78e66df5" />
+      <TestMethod codeBase="M:/Book Work/Code/Chapter8/Recipe8/Tests/bin/Debug/Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Tests.ReservationTest, Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForDuplicateReservation" />
+    </UnitTest>
+    <UnitTest name="TestForArrivesAndLeavesFromSameLocation" storage="m:\book work\code\chapter8\recipe8\tests\bin\debug\tests.dll" id="8f20bc21-42c5-f7b1-8b79-fcb83d29919b">
+      <Execution id="4295b107-9046-4d0a-978d-3695f99a388d" />
+      <TestMethod codeBase="M:/Book Work/Code/Chapter8/Recipe8/Tests/bin/Debug/Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Tests.ReservationTest, Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestForArrivesAndLeavesFromSameLocation" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="11f23460-0a16-f372-3438-da565d0b5ca1" executionId="b7c14fec-faaa-4e97-8f53-bf7b78e66df5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b57ca660-0fb3-a788-682d-22c7c53c2c94" executionId="a41ba293-b468-4225-b442-2f8ab04e809c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8f20bc21-42c5-f7b1-8b79-fcb83d29919b" executionId="4295b107-9046-4d0a-978d-3695f99a388d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="b7c14fec-faaa-4e97-8f53-bf7b78e66df5" testId="11f23460-0a16-f372-3438-da565d0b5ca1" testName="TestForDuplicateReservation" computerName="INSANE" duration="00:00:19.6672100" startTime="2010-03-21T13:46:35.7750710-05:00" endTime="2010-03-21T13:46:57.8983363-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7c14fec-faaa-4e97-8f53-bf7b78e66df5">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method Tests.ReservationTest.TestForDuplicateReservation did not throw expected exception System.InvalidOperationException.</Message>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a41ba293-b468-4225-b442-2f8ab04e809c" testId="b57ca660-0fb3-a788-682d-22c7c53c2c94" testName="TestForArrivalDateGreaterThanDepartureDate" computerName="INSANE" duration="00:00:35.2080138" startTime="2010-03-21T13:46:57.9113371-05:00" endTime="2010-03-21T13:47:33.1193509-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a41ba293-b468-4225-b442-2f8ab04e809c">
+    </UnitTestResult>
+    <UnitTestResult executionId="4295b107-9046-4d0a-978d-3695f99a388d" testId="8f20bc21-42c5-f7b1-8b79-fcb83d29919b" testName="TestForArrivesAndLeavesFromSameLocation" computerName="INSANE" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4295b107-9046-4d0a-978d-3695f99a388d">
+    </UnitTestResult>
+  </Results>
+</TestRun>

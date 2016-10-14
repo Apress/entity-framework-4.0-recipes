@@ -1,0 +1,3 @@
+Oops...better test first.
+Order 2 [HAL 9000 Supercomputer], status = Ship
+Press <enter> to continue...

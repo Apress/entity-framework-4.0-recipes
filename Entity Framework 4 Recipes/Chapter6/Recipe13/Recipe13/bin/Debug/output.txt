@@ -1,0 +1,12 @@
+Dealers and Their Cars
+======================
+
+Dealer: Luxury Auto World
+	2010 Blue BMW 310i
+
+Dealer: Southtown Toyota
+	2010 Blue Toyota Tundra
+
+Dealer: All Cities Toyota
+	2010 Green Toyota Camry
+Press <enter> to continue...

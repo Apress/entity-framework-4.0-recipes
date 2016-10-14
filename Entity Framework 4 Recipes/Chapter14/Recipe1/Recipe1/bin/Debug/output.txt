@@ -1,0 +1,4 @@
+High Country Backpacking Tent Unit Price: $199.95
+Changing High Country Backpacking Tent's Unit Price to: $239.95
+Concurrency Exception! Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.
+Press <enter> to continue...

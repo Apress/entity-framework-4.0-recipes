@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Booking" EntityType="EFRecipesModel.Store.Booking" store:Type="Tables" Schema="chapter9" />
+          <EntitySet Name="TravelAgent" EntityType="EFRecipesModel.Store.TravelAgent" store:Type="Tables" Schema="chapter9" />
+          <AssociationSet Name="FK_Booking_TravelAgent" Association="EFRecipesModel.Store.FK_Booking_TravelAgent">
+            <End Role="TravelAgent" EntitySet="TravelAgent" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="int" Nullable="false" />
+          <Property Name="Customer" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="BookingDate" Type="datetime" Nullable="false" />
+          <Property Name="Paid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TravelAgent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Booking_TravelAgent">
+          <End Role="TravelAgent" Type="EFRecipesModel.Store.TravelAgent" Multiplicity="1" />
+          <End Role="Booking" Type="EFRecipesModel.Store.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelAgent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bookings" EntityType="EFRecipesModel.Booking" />
+          <EntitySet Name="TravelAgents" EntityType="EFRecipesModel.TravelAgent" />
+          <AssociationSet Name="FK_Booking_TravelAgent" Association="EFRecipesModel.FK_Booking_TravelAgent">
+            <End Role="TravelAgent" EntitySet="TravelAgents" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="Int32" Nullable="false" />
+          <Property Name="Customer" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" />
+          <Property Name="Paid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TravelAgent" Relationship="EFRecipesModel.FK_Booking_TravelAgent" FromRole="Booking" ToRole="TravelAgent" />
+        </EntityType>
+        <EntityType Name="TravelAgent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Bookings" Relationship="EFRecipesModel.FK_Booking_TravelAgent" FromRole="TravelAgent" ToRole="Booking" />
+        </EntityType>
+        <Association Name="FK_Booking_TravelAgent">
+          <End Role="TravelAgent" Type="EFRecipesModel.TravelAgent" Multiplicity="1" />
+          <End Role="Booking" Type="EFRecipesModel.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TravelAgent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Bookings"><EntityTypeMapping TypeName="EFRecipesModel.Booking"><MappingFragment StoreEntitySet="Booking">
+            <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+            <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+            <ScalarProperty Name="Customer" ColumnName="Customer" />
+            <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+            <ScalarProperty Name="Paid" ColumnName="Paid" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="TravelAgents"><EntityTypeMapping TypeName="EFRecipesModel.TravelAgent"><MappingFragment StoreEntitySet="TravelAgent">
+            <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe6">
+        <EntityTypeShape EntityType="EFRecipesModel.Booking" Width="1.5" PointX="3" PointY="0.875" Height="2.1725878906250005" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.TravelAgent" Width="1.5" PointX="0.75" PointY="1.25" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Booking_TravelAgent" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.047841796875" />
+          <ConnectorPoint PointX="3" PointY="2.047841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

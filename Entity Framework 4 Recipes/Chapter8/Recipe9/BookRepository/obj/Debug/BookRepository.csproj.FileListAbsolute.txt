@@ -1,0 +1,6 @@
+M:\Book Work\Code\Chapter8\Recipe9\BookRepository\bin\Debug\BookRepository.dll.config
+M:\Book Work\Code\Chapter8\Recipe9\BookRepository\bin\Debug\BookRepository.dll
+M:\Book Work\Code\Chapter8\Recipe9\BookRepository\bin\Debug\BookRepository.pdb
+M:\Book Work\Code\Chapter8\Recipe9\BookRepository\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter8\Recipe9\BookRepository\obj\Debug\BookRepository.dll
+M:\Book Work\Code\Chapter8\Recipe9\BookRepository\obj\Debug\BookRepository.pdb

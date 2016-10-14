@@ -1,0 +1,7 @@
+Authors and Their Books...
+Jonathan Chaffer
+	jQuery Reference Guide, ISBN = 978-1-847193-81-0
+	jQuery Tips and Tricks, ISBN = 978-1-29298333
+Chad Campbell
+	Silverlight 2, ISBN = 978-1033988429
+Press <enter> to continue...

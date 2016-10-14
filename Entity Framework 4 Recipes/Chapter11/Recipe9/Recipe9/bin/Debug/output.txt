@@ -1,0 +1,5 @@
+Movie rentals late returns
+==========================
+A Day in the Life was 3 days late, fee: $3.00
+Jim's Story was 7 days late, fee: $3.00
+Press <enter> to continue...

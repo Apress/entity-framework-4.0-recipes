@@ -1,0 +1,8 @@
+M:\Book Work\Code\Chapter8\Recipe9\Tests\bin\Debug\Tests.dll
+M:\Book Work\Code\Chapter8\Recipe9\Tests\bin\Debug\Tests.pdb
+M:\Book Work\Code\Chapter8\Recipe9\Tests\bin\Debug\BookRepository.dll
+M:\Book Work\Code\Chapter8\Recipe9\Tests\bin\Debug\BookRepository.pdb
+M:\Book Work\Code\Chapter8\Recipe9\Tests\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter8\Recipe9\Tests\obj\Debug\Tests.dll
+M:\Book Work\Code\Chapter8\Recipe9\Tests\obj\Debug\Tests.pdb
+M:\Book Work\Code\Chapter8\Recipe9\Tests\bin\Debug\Tests.dll.config

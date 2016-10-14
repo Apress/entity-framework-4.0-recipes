@@ -1,0 +1,7 @@
+Rental Activity for 2/2/2010
+Vehicles Rented
+2010 Toyota Camry
+2010 Chevrolet Corvette
+Total Rentals: 2
+Total Payments: $200.00
+Press <enter> to continue...

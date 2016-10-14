@@ -1,0 +1,10 @@
+Using esql for the query...
+
+Category 'Backpacking Tents' has an average price of $79.99
+Category 'Family Tents' has an average price of $159.99
+
+Using LINQ for the query...
+
+Category 'Backpacking Tents' has an average price of $79.99
+Category 'Family Tents' has an average price of $159.99
+Press <enter> to continue...

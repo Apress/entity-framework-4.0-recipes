@@ -1,0 +1,12 @@
+I:\Book Work\Code\Chapter10\Recipe4\Recipe4\bin\Debug\Recipe4.exe.config
+I:\Book Work\Code\Chapter10\Recipe4\Recipe4\bin\Debug\Recipe4.exe
+I:\Book Work\Code\Chapter10\Recipe4\Recipe4\bin\Debug\Recipe4.pdb
+I:\Book Work\Code\Chapter10\Recipe4\Recipe4\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\Book Work\Code\Chapter10\Recipe4\Recipe4\obj\x86\Debug\Recipe4.exe
+I:\Book Work\Code\Chapter10\Recipe4\Recipe4\obj\x86\Debug\Recipe4.pdb
+H:\Book Work\Code\Chapter10\Recipe4\Recipe4\bin\Debug\Recipe4.exe.config
+H:\Book Work\Code\Chapter10\Recipe4\Recipe4\obj\x86\Debug\Recipe4.exe
+H:\Book Work\Code\Chapter10\Recipe4\Recipe4\obj\x86\Debug\Recipe4.pdb
+H:\Book Work\Code\Chapter10\Recipe4\Recipe4\bin\Debug\Recipe4.exe
+H:\Book Work\Code\Chapter10\Recipe4\Recipe4\bin\Debug\Recipe4.pdb
+H:\Book Work\Code\Chapter10\Recipe4\Recipe4\obj\x86\Debug\ResolveAssemblyReference.cache

@@ -1,0 +1,9 @@
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\bin\MediaServices.dll
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\bin\MediaServices.pdb
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\bin\MediaData.dll
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\bin\MediaEntities.dll
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\bin\MediaData.pdb
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\bin\MediaEntities.pdb
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\obj\Debug\MediaServices.dll
+M:\Book Work\Code\Chapter9\Recipe10\MediaServices\obj\Debug\MediaServices.pdb

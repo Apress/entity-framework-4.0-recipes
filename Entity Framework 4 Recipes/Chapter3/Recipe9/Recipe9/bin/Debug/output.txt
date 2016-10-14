@@ -1,0 +1,12 @@
+Using LINQ Builder Methods
+Jill Stevens is in Dallas
+David Frazier is in Dallas
+
+Using Entity SQL
+Jill Stevens is in Dallas
+David Frazier is in Dallas
+
+Using ESQL Builder Methods
+Jill Stevens is in Dallas
+David Frazier is in Dallas
+Press <enter> to continue...

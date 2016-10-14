@@ -1,0 +1,12 @@
+Staff
+=====
+	Jill Robins, Hire date: 8/12/2002, Salary: $72,500.00 Principal)
+	Roland Jones, Hire date: 8/14/2005, Salary: $61,000.00 Instructor)
+	Steven Curtis, Hire date: 8/23/1992, Salary: $68,200.00 Instructor)
+
+Students
+==========
+	Karen Roberts
+	Bobby McGivens
+	Janis Hettler
+Press <enter> to continue...

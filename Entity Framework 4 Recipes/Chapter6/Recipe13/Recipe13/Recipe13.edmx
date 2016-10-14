@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="BMW" EntityType="EFRecipesModel.Store.BMW" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="CarDealer" EntityType="EFRecipesModel.Store.CarDealer" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Dealer" EntityType="EFRecipesModel.Store.Dealer" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Toyota" EntityType="EFRecipesModel.Store.Toyota" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_CarDealer_Dealer" Association="EFRecipesModel.Store.FK_CarDealer_Dealer">
+            <End Role="Dealer" EntitySet="Dealer" />
+            <End Role="CarDealer" EntitySet="CarDealer" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BMW">
+          <Key>
+            <PropertyRef Name="CarId" />
+          </Key>
+          <Property Name="CarId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Year" Type="varchar" Nullable="false" MaxLength="4" />
+          <Property Name="Color" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CollisionAvoidance" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarDealer">
+          <Key>
+            <PropertyRef Name="CarId" />
+          </Key>
+          <Property Name="CarId" Type="int" Nullable="false" />
+          <Property Name="DealerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Name="DealerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Toyota">
+          <Key>
+            <PropertyRef Name="CarId" />
+          </Key>
+          <Property Name="CarId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Model" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Year" Type="varchar" Nullable="false" MaxLength="4" />
+          <Property Name="Color" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CarDealer_Dealer">
+          <End Role="Dealer" Type="EFRecipesModel.Store.Dealer" Multiplicity="1" />
+          <End Role="CarDealer" Type="EFRecipesModel.Store.CarDealer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dealer">
+              <PropertyRef Name="DealerId" />
+            </Principal>
+            <Dependent Role="CarDealer">
+              <PropertyRef Name="DealerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Dealers" EntityType="EFRecipesModel.Dealer" />
+          <EntitySet Name="CarSet" EntityType="EFRecipesModel.Car" />
+          <AssociationSet Name="CarDealer" Association="EFRecipesModel.CarDealer">
+            <End Role="Car" EntitySet="CarSet" />
+            <End Role="Dealer" EntitySet="Dealers" /></AssociationSet></EntityContainer>
+        <EntityType Name="BMW" BaseType="EFRecipesModel.Car">
+          <Property Name="CollisionAvoidance" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dealer">
+          <Key>
+            <PropertyRef Name="DealerId" />
+          </Key>
+          <Property Name="DealerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Cars" Relationship="EFRecipesModel.CarDealer" FromRole="Dealer" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="Toyota" BaseType="EFRecipesModel.Car">
+          </EntityType>
+        <EntityType Name="Car" Abstract="true" >
+          <Key>
+            <PropertyRef Name="CarId" /></Key>
+          <Property Type="Int32" Name="CarId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Model" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Year" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dealer" Relationship="EFRecipesModel.CarDealer" FromRole="Car" ToRole="Dealer" /></EntityType>
+        <Association Name="CarDealer">
+          <End Type="EFRecipesModel.Car" Role="Car" Multiplicity="*" />
+          <End Type="EFRecipesModel.Dealer" Role="Dealer" Multiplicity="1" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Dealers"><EntityTypeMapping TypeName="EFRecipesModel.Dealer"><MappingFragment StoreEntitySet="Dealer">
+            <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CarSet">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.BMW)">
+              <MappingFragment StoreEntitySet="BMW">
+                <ScalarProperty Name="CollisionAvoidance"
+                                ColumnName="CollisionAvoidance" />
+                <ScalarProperty Name="CarId" ColumnName="CarId"/>
+                <ScalarProperty Name="Model" ColumnName="Model"/>
+                <ScalarProperty Name="Year" ColumnName="Year"/>
+                <ScalarProperty Name="Color" ColumnName="Color"/>
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Toyota)">
+              <MappingFragment StoreEntitySet="Toyota">
+                <ScalarProperty Name="CarId" ColumnName="CarId"/>
+                <ScalarProperty Name="Model" ColumnName="Model"/>
+                <ScalarProperty Name="Year" ColumnName="Year"/>
+                <ScalarProperty Name="Color" ColumnName="Color"/>
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CarDealer" TypeName="EFRecipesModel.CarDealer" StoreEntitySet="CarDealer">
+            <EndProperty Name="Dealer">
+              <ScalarProperty Name="DealerId" ColumnName="DealerId" /></EndProperty>
+            <EndProperty Name="Car">
+              <ScalarProperty Name="CarId" ColumnName="CarId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe13">
+        <EntityTypeShape EntityType="EFRecipesModel.BMW" Width="1.75" PointX="0.75" PointY="3.75" Height="1.2110807291666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Dealer" Width="1.5" PointX="4" PointY="1" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Toyota" Width="1.5" PointX="2.75" PointY="3.75" Height="1.0187792968749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Car" Width="1.5" PointX="1.75" PointY="1" Height="1.787985026041667" />
+        <InheritanceConnector EntityType="EFRecipesModel.BMW">
+          <ConnectorPoint PointX="2.5" PointY="2.787985026041667" />
+          <ConnectorPoint PointX="2.5" PointY="3.375" />
+          <ConnectorPoint PointX="1.625" PointY="3.375" />
+          <ConnectorPoint PointX="1.625" PointY="3.75" /></InheritanceConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.Toyota">
+          <ConnectorPoint PointX="2.5" PointY="2.9802864583333339" />
+          <ConnectorPoint PointX="2.5" PointY="3.375" />
+          <ConnectorPoint PointX="3.5" PointY="3.375" />
+          <ConnectorPoint PointX="3.5" PointY="3.75" />
+          </InheritanceConnector>
+        <AssociationConnector Association="EFRecipesModel.CarDealer">
+          <ConnectorPoint PointX="3.25" PointY="1.7978417968749998" />
+          <ConnectorPoint PointX="4" PointY="1.7978417968749998" />
+          </AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

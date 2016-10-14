@@ -1,0 +1,9 @@
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\bin\BookingService.dll
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\bin\BookingService.pdb
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\bin\BookingData.dll
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\bin\BookingEntities.dll
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\bin\BookingData.pdb
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\bin\BookingEntities.pdb
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\obj\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\obj\Debug\BookingService.dll
+H:\Book Work\Code\Chapter9\Recipe6\BookingService\obj\Debug\BookingService.pdb

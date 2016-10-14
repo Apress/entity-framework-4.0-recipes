@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="RefurbishedToy" EntityType="EFRecipesModel.Store.RefurbishedToy" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Toy" EntityType="EFRecipesModel.Store.Toy" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_RefurbishedToy_Toy" Association="EFRecipesModel.Store.FK_RefurbishedToy_Toy">
+            <End Role="Toy" EntitySet="Toy" />
+            <End Role="RefurbishedToy" EntitySet="RefurbishedToy" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RefurbishedToy">
+          <Key>
+            <PropertyRef Name="ToyId" />
+          </Key>
+          <Property Name="ToyId" Type="int" Nullable="false" />
+          <Property Name="Quality" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Toy">
+          <Key>
+            <PropertyRef Name="ToyId" />
+          </Key>
+          <Property Name="ToyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Scale="2" />
+          <Property Name="ForDonationOnly" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RefurbishedToy_Toy">
+          <End Role="Toy" Type="EFRecipesModel.Store.Toy" Multiplicity="1" />
+          <End Role="RefurbishedToy" Type="EFRecipesModel.Store.RefurbishedToy" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Toy">
+              <PropertyRef Name="ToyId" />
+            </Principal>
+            <Dependent Role="RefurbishedToy">
+              <PropertyRef Name="ToyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Toys" EntityType="EFRecipesModel.Toy" />
+        </EntityContainer>
+        <EntityType Name="RefurbishedToy" BaseType="EFRecipesModel.Toy">
+          <Property Name="Quality" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Toy">
+          <Key>
+            <PropertyRef Name="ToyId" />
+          </Key>
+          <Property Name="ToyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Toys">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Toy)">
+              <MappingFragment StoreEntitySet="Toy">
+                <ScalarProperty Name="ToyId" ColumnName="ToyId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <Condition ColumnName="ForDonationOnly" Value="0" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.RefurbishedToy)">
+              <MappingFragment StoreEntitySet="RefurbishedToy">
+                <ScalarProperty Name="ToyId" ColumnName="ToyId" />
+                <ScalarProperty Name="Quality" ColumnName="Quality" />
+                </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe10">
+        <EntityTypeShape EntityType="EFRecipesModel.RefurbishedToy" Width="1.5" PointX="2.125" PointY="3" Height="1.2110807291666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Toy" Width="1.5" PointX="2.125" PointY="0.875" Height="1.59568359375" IsExpanded="true" />
+        <InheritanceConnector EntityType="EFRecipesModel.RefurbishedToy">
+          <ConnectorPoint PointX="2.875" PointY="2.47068359375" />
+          <ConnectorPoint PointX="2.875" PointY="3" />
+          </InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

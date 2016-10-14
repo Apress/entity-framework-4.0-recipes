@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Competitor" EntityType="EFRecipesModel.Store.Competitor" store:Type="Tables" Schema="Chapter8" />
+          <EntitySet Name="Event" EntityType="EFRecipesModel.Store.Event" store:Type="Tables" Schema="Chapter8" />
+          <EntitySet Name="Venue" EntityType="EFRecipesModel.Store.Venue" store:Type="Tables" Schema="Chapter8" />
+          <AssociationSet Name="FK_Competitor_Event" Association="EFRecipesModel.Store.FK_Competitor_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Competitor" EntitySet="Competitor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Venue" Association="EFRecipesModel.Store.FK_Event_Venue">
+            <End Role="Venue" EntitySet="Venue" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="CompetitorId" />
+          </Key>
+          <Property Name="CompetitorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="VenueId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="VenueId" />
+          </Key>
+          <Property Name="VenueId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Competitor_Event">
+          <End Role="Event" Type="EFRecipesModel.Store.Event" Multiplicity="1" />
+          <End Role="Competitor" Type="EFRecipesModel.Store.Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Venue">
+          <End Role="Venue" Type="EFRecipesModel.Store.Venue" Multiplicity="1" />
+          <End Role="Event" Type="EFRecipesModel.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="VenueId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="VenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Competitors" EntityType="EFRecipesModel.Competitor" />
+          <EntitySet Name="Events" EntityType="EFRecipesModel.Event" />
+          <EntitySet Name="Venues" EntityType="EFRecipesModel.Venue" />
+          <AssociationSet Name="FK_Competitor_Event" Association="EFRecipesModel.FK_Competitor_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Competitor" EntitySet="Competitors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Venue" Association="EFRecipesModel.FK_Event_Venue">
+            <End Role="Venue" EntitySet="Venues" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="CompetitorId" />
+          </Key>
+          <Property Name="CompetitorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="VenueId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Competitors" Relationship="EFRecipesModel.FK_Competitor_Event" FromRole="Event" ToRole="Competitor" />
+          <NavigationProperty Name="Venue" Relationship="EFRecipesModel.FK_Event_Venue" FromRole="Event" ToRole="Venue" />
+        </EntityType>
+        <EntityType Name="Venue">
+          <Key>
+            <PropertyRef Name="VenueId" />
+          </Key>
+          <Property Name="VenueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="EFRecipesModel.FK_Event_Venue" FromRole="Venue" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_Competitor_Event">
+          <End Role="Event" Type="EFRecipesModel.Event" Multiplicity="1" />
+          <End Role="Competitor" Type="EFRecipesModel.Competitor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Competitor">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Venue">
+          <End Role="Venue" Type="EFRecipesModel.Venue" Multiplicity="1" />
+          <End Role="Event" Type="EFRecipesModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="VenueId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="VenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Competitors"><EntityTypeMapping TypeName="EFRecipesModel.Competitor"><MappingFragment StoreEntitySet="Competitor">
+            <ScalarProperty Name="CompetitorId" ColumnName="CompetitorId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="EventId" ColumnName="EventId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Events"><EntityTypeMapping TypeName="EFRecipesModel.Event"><MappingFragment StoreEntitySet="Event">
+            <ScalarProperty Name="EventId" ColumnName="EventId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="VenueId" ColumnName="VenueId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Venues"><EntityTypeMapping TypeName="EFRecipesModel.Venue"><MappingFragment StoreEntitySet="Venue">
+            <ScalarProperty Name="VenueId" ColumnName="VenueId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe2">
+        <EntityTypeShape EntityType="EFRecipesModel.Competitor" Width="1.5" PointX="5.25" PointY="1" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Event" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Venue" Width="1.5" PointX="0.75" PointY="1.125" Height="1.5956835937500002" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Competitor_Event" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="1.7978417968749998" />
+          <ConnectorPoint PointX="5.25" PointY="1.7978417968749998" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.FK_Event_Venue" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.9228417968750002" />
+          <ConnectorPoint PointX="3" PointY="1.9228417968750002" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

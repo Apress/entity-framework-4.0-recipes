@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="d8ef1c3f-067f-4bd2-83a7-bb4d4bc094ef" name="ltenny@INSANE 2010-03-22 19:54:41" runUser="insane\ltenny" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="2ff48031-4417-4f62-a051-a48b5d9d964e">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="ltenny_INSANE 2010-03-22 19_54_41" />
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2010-03-22T19:54:41.0033407-05:00" queuing="2010-03-22T19:54:42.7384399-05:00" start="2010-03-22T19:54:43.0174559-05:00" finish="2010-03-22T19:55:07.5228575-05:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="2" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="1" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="INSANE" outcome="Error" timestamp="2010-03-22T19:55:07.5208574-05:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestsBooksInCategory" storage="m:\book work\code\chapter8\recipe9\tests\bin\debug\tests.dll" id="dd312093-b676-d7fa-dfa0-0fa5f21af16f">
+      <Execution id="d3173ab1-e254-4ab1-a285-3ab7b5a2e27e" />
+      <TestMethod codeBase="M:/Book Work/Code/Chapter8/Recipe9/Tests/bin/Debug/Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Tests.BookRepositoryTest, Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestsBooksInCategory" />
+    </UnitTest>
+    <UnitTest name="TestBooksPublishedInTheYear" storage="m:\book work\code\chapter8\recipe9\tests\bin\debug\tests.dll" id="b4e992b3-e609-5e60-e1b9-2ff345976e9d">
+      <Execution id="7bddd911-2b73-48ff-bbad-7016774c450a" />
+      <TestMethod codeBase="M:/Book Work/Code/Chapter8/Recipe9/Tests/bin/Debug/Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Tests.BookRepositoryTest, Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestBooksPublishedInTheYear" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="dd312093-b676-d7fa-dfa0-0fa5f21af16f" executionId="d3173ab1-e254-4ab1-a285-3ab7b5a2e27e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b4e992b3-e609-5e60-e1b9-2ff345976e9d" executionId="7bddd911-2b73-48ff-bbad-7016774c450a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="d3173ab1-e254-4ab1-a285-3ab7b5a2e27e" testId="dd312093-b676-d7fa-dfa0-0fa5f21af16f" testName="TestsBooksInCategory" computerName="INSANE" duration="00:00:24.3213911" startTime="2010-03-22T19:54:43.2004664-05:00" endTime="2010-03-22T19:55:07.5218575-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d3173ab1-e254-4ab1-a285-3ab7b5a2e27e">
+    </UnitTestResult>
+    <UnitTestResult executionId="7bddd911-2b73-48ff-bbad-7016774c450a" testId="b4e992b3-e609-5e60-e1b9-2ff345976e9d" testName="TestBooksPublishedInTheYear" computerName="INSANE" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7bddd911-2b73-48ff-bbad-7016774c450a">
+    </UnitTestResult>
+  </Results>
+</TestRun>

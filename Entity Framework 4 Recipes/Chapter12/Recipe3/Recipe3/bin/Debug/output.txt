@@ -1,0 +1,11 @@
+1:09 PM: Database: EFRecipes, State: Open, was: Closed
+1:09 PM: Database: EFRecipes, State: Closed, was: Open
+About to SaveChanges()
+1:09 PM: Database: EFRecipes, State: Open, was: Closed
+1:09 PM: Database: EFRecipes, State: Closed, was: Open
+Donations over $300
+1:09 PM: Database: EFRecipes, State: Open, was: Closed
+Robert Byrd gave $350.00
+Kim Kerns gave $750.00
+1:09 PM: Database: EFRecipes, State: Closed, was: Open
+Press <enter> to continue...

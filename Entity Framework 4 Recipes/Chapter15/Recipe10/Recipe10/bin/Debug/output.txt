@@ -1,0 +1,6 @@
+Work Orders
+===========
+11/4/2009	Main site database server is down!	High
+11/4/2009	Printer needs paper in shipping.	Normal
+11/4/2009	Backup job complete, remove tape	Normal
+Press <enter> to continue...

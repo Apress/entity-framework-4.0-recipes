@@ -1,0 +1,11 @@
+
+Name: Flowers
+Stock Count: 4
+Discountinued: Yes
+Supplier: Unknown
+
+Name: Red Fire Truck
+Stock Count: 0
+Discountinued: No
+Supplier: CallCom
+Press <enter> to continue...

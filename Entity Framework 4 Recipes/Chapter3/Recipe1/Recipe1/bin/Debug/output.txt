@@ -1,0 +1,6 @@
+2 rows inserted
+Payments
+========
+Paid $99.97 to Ace Plumbing
+Paid $43.83 to Joe's Trash Service
+Press <enter> to continue...

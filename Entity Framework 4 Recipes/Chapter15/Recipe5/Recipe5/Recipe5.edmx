@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Client" EntityType="EFRecipesModel.Store.Client" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="Invoice" EntityType="EFRecipesModel.Store.Invoice" store:Type="Tables" Schema="Chapter15" />
+          <AssociationSet Name="FK_Invoice_Client" Association="EFRecipesModel.Store.FK_Invoice_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="InvoiceId" />
+          </Key>
+          <Property Name="InvoiceId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Invoice_Client">
+          <End Role="Client" Type="EFRecipesModel.Store.Client" Multiplicity="1" />
+          <End Role="Invoice" Type="EFRecipesModel.Store.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <AssociationSet Name="FK_Invoice_Client" Association="EFRecipesModel.FK_Invoice_Client">
+            <End Role="Client" EntitySet="Audits" />
+            <End Role="Invoice" EntitySet="Audits" />
+          </AssociationSet>
+          <EntitySet Name="Audits" EntityType="EFRecipesModel.Audit" /></EntityContainer>
+        <EntityType Name="Client" BaseType="EFRecipesModel.Audit">
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Invoices" Relationship="EFRecipesModel.FK_Invoice_Client" FromRole="Client" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Invoice" BaseType="EFRecipesModel.Audit">
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="EFRecipesModel.FK_Invoice_Client" FromRole="Invoice" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_Invoice_Client">
+          <End Role="Client" Type="EFRecipesModel.Client" Multiplicity="1" />
+          <End Role="Invoice" Type="EFRecipesModel.Invoice" Multiplicity="*" />
+        <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" /></Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="ClientId" /></Dependent></ReferentialConstraint></Association>
+        <EntityType Name="Audit" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" /></Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Audits"><EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Client)">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="ClientId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+          </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Invoice)">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="Id" ColumnName="InvoiceId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe5">
+        <EntityTypeShape EntityType="EFRecipesModel.Client" Width="1.5" PointX="3.25" PointY="4.25" Height="1.4033821614583335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Invoice" Width="1.5" PointX="5.5" PointY="4.25" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Invoice_Client" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.75" PointY="4.9516910807291667" />
+          <ConnectorPoint PointX="5.5" PointY="4.9516910807291667" />
+          </AssociationConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.Audit" Width="1.5" PointX="4.375" PointY="1.75" Height="1.59568359375" />
+        <InheritanceConnector EntityType="EFRecipesModel.Client">
+          <ConnectorPoint PointX="5.125" PointY="3.34568359375" />
+          <ConnectorPoint PointX="5.125" PointY="3.875" />
+          <ConnectorPoint PointX="4" PointY="3.875" />
+          <ConnectorPoint PointX="4" PointY="4.25" /></InheritanceConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.Invoice">
+          <ConnectorPoint PointX="5.125" PointY="3.34568359375" />
+          <ConnectorPoint PointX="5.125" PointY="3.875" />
+          <ConnectorPoint PointX="6.25" PointY="3.875" />
+          <ConnectorPoint PointX="6.25" PointY="4.25" /></InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

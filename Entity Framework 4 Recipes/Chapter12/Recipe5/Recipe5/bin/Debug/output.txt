@@ -1,0 +1,6 @@
+Course: CS 301
+Course: Math 455
+	Class: 8, Instructor: Norma Hall
+		Student: Jill Glass
+		Student: Robin Rosen
+Press <enter> to continue...

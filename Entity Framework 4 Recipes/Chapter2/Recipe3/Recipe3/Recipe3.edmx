@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Album" EntityType="EFRecipesModel.Store.Album" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="Artist" EntityType="EFRecipesModel.Store.Artist" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="LinkTable" EntityType="EFRecipesModel.Store.LinkTable" store:Type="Tables" Schema="Chapter2" />
+          <AssociationSet Name="FK_LinkTable_Album" Association="EFRecipesModel.Store.FK_LinkTable_Album">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="LinkTable" EntitySet="LinkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LinkTable_Artist" Association="EFRecipesModel.Store.FK_LinkTable_Artist">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="LinkTable" EntitySet="LinkTable" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumId" />
+          </Key>
+          <Property Name="AlbumId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="ArtistId" />
+          </Key>
+          <Property Name="ArtistId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LinkTable">
+          <Key>
+            <PropertyRef Name="ArtistId" />
+            <PropertyRef Name="AlbumId" />
+          </Key>
+          <Property Name="ArtistId" Type="int" Nullable="false" />
+          <Property Name="AlbumId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_LinkTable_Album">
+          <End Role="Album" Type="EFRecipesModel.Store.Album" Multiplicity="1" />
+          <End Role="LinkTable" Type="EFRecipesModel.Store.LinkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="AlbumId" />
+            </Principal>
+            <Dependent Role="LinkTable">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LinkTable_Artist">
+          <End Role="Artist" Type="EFRecipesModel.Store.Artist" Multiplicity="1" />
+          <End Role="LinkTable" Type="EFRecipesModel.Store.LinkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="ArtistId" />
+            </Principal>
+            <Dependent Role="LinkTable">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Albums" EntityType="EFRecipesModel.Album" />
+          <EntitySet Name="Artists" EntityType="EFRecipesModel.Artist" />
+          <AssociationSet Name="LinkTable" Association="EFRecipesModel.LinkTable">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Artist" EntitySet="Artists" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumId" />
+          </Key>
+          <Property Name="AlbumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Artists" Relationship="EFRecipesModel.LinkTable" FromRole="Album" ToRole="Artist" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="ArtistId" />
+          </Key>
+          <Property Name="ArtistId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Albums" Relationship="EFRecipesModel.LinkTable" FromRole="Artist" ToRole="Album" />
+        </EntityType>
+        <Association Name="LinkTable">
+          <End Role="Album" Type="EFRecipesModel.Album" Multiplicity="*" />
+          <End Role="Artist" Type="EFRecipesModel.Artist" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Albums"><EntityTypeMapping TypeName="EFRecipesModel.Album"><MappingFragment StoreEntitySet="Album">
+            <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+            <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Artists"><EntityTypeMapping TypeName="EFRecipesModel.Artist"><MappingFragment StoreEntitySet="Artist">
+            <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="LinkTable" TypeName="EFRecipesModel.LinkTable" StoreEntitySet="LinkTable">
+            <EndProperty Name="Album">
+              <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+            </EndProperty>
+            <EndProperty Name="Artist">
+              <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe3">
+        <EntityTypeShape EntityType="EFRecipesModel.Album" Width="1.5" PointX="0.75" PointY="1.125" Height="1.5956835937500002" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Artist" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.LinkTable" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.9228417968750002" />
+          <ConnectorPoint PointX="3" PointY="1.9228417968750002" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

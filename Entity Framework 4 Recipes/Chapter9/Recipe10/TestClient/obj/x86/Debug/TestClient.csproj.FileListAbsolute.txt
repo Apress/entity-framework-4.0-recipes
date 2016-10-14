@@ -1,0 +1,8 @@
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\bin\Debug\TestClient.exe.config
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\bin\Debug\TestClient.exe
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\bin\Debug\TestClient.pdb
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\bin\Debug\MediaEntities.dll
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\bin\Debug\MediaEntities.pdb
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\obj\x86\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\obj\x86\Debug\TestClient.exe
+M:\Book Work\Code\Chapter9\Recipe10\TestClient\obj\x86\Debug\TestClient.pdb

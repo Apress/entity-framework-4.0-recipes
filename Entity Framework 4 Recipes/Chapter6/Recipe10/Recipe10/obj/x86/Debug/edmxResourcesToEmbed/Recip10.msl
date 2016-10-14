@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+    <EntitySetMapping Name="RefurbishedToys">
+      <EntityTypeMapping TypeName="EFRecipesModel.RefurbishedToy">
+        <MappingFragment StoreEntitySet="RefurbishedToy">
+          <ScalarProperty Name="ToyId" ColumnName="ToyId" />
+          <ScalarProperty Name="Quality" ColumnName="Quality" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Toys">
+      <EntityTypeMapping TypeName="EFRecipesModel.Toy">
+        <MappingFragment StoreEntitySet="Toy">
+          <ScalarProperty Name="ToyId" ColumnName="ToyId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ForDonationOnly" ColumnName="ForDonationOnly" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,12 @@
+H:\Book Work\Code\Chapter6\Recipe13\Recipe13\bin\Debug\Recipe13.exe.config
+H:\Book Work\Code\Chapter6\Recipe13\Recipe13\bin\Debug\Recipe13.exe
+H:\Book Work\Code\Chapter6\Recipe13\Recipe13\bin\Debug\Recipe13.pdb
+H:\Book Work\Code\Chapter6\Recipe13\Recipe13\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter6\Recipe13\Recipe13\obj\x86\Debug\Recipe13.exe
+H:\Book Work\Code\Chapter6\Recipe13\Recipe13\obj\x86\Debug\Recipe13.pdb
+G:\Book Work\Code\Chapter6\Recipe13\Recipe13\bin\Debug\Recipe13.exe.config
+G:\Book Work\Code\Chapter6\Recipe13\Recipe13\obj\x86\Debug\Recipe13.exe
+G:\Book Work\Code\Chapter6\Recipe13\Recipe13\obj\x86\Debug\Recipe13.pdb
+G:\Book Work\Code\Chapter6\Recipe13\Recipe13\bin\Debug\Recipe13.exe
+G:\Book Work\Code\Chapter6\Recipe13\Recipe13\bin\Debug\Recipe13.pdb
+G:\Book Work\Code\Chapter6\Recipe13\Recipe13\obj\x86\Debug\ResolveAssemblyReference.cache

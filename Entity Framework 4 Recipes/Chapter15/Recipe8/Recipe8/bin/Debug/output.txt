@@ -1,0 +1,7 @@
+My friend Joan Roland lives at: 
+	123 Main
+	Anytown, CA 90210
+My relative Billy Miner lives at: 
+	1200 East Street
+	Big Town, KS 66026
+Press <enter> to continue...

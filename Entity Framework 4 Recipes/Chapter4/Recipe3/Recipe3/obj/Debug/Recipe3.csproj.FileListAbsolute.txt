@@ -1,0 +1,10 @@
+H:\Book Work\Code\Chapter4\Recipe3\Recipe3\bin\Recipe3.dll
+H:\Book Work\Code\Chapter4\Recipe3\Recipe3\bin\Recipe3.pdb
+H:\Book Work\Code\Chapter4\Recipe3\Recipe3\obj\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter4\Recipe3\Recipe3\obj\Debug\Recipe3.dll
+H:\Book Work\Code\Chapter4\Recipe3\Recipe3\obj\Debug\Recipe3.pdb
+M:\Book Work\Code\Chapter4\Recipe3\Recipe3\bin\Recipe3.dll
+M:\Book Work\Code\Chapter4\Recipe3\Recipe3\bin\Recipe3.pdb
+M:\Book Work\Code\Chapter4\Recipe3\Recipe3\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter4\Recipe3\Recipe3\obj\Debug\Recipe3.dll
+M:\Book Work\Code\Chapter4\Recipe3\Recipe3\obj\Debug\Recipe3.pdb

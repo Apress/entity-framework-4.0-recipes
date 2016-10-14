@@ -1,0 +1,14 @@
+All of the media...
+
+Blog Posting
+Title: ASP.NET MVC, Author: Steven Grace, Post: What's New
+
+Story
+Title: Time in a Bottle, Author: Emily Jones, Plot: Murder on the high seas
+
+Educational Video
+Title: ASP.NET Examples, Instructor: Joseph Robins
+
+Recreational Video
+Title: Archie's Place, Rating: 1
+Press <enter> to continue...

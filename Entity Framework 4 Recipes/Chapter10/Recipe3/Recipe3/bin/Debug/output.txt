@@ -1,0 +1,4 @@
+ATM Withdrawals for ATM at 17 at 12th and Main
+	2/1/2010 Total Withdrawn = $75.00
+	2/2/2010 Total Withdrawn = $170.00
+Press <enter> to continue...

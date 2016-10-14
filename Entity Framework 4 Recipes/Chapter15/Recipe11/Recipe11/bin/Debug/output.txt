@@ -1,0 +1,9 @@
+Preferred Customers
+Name: Steven James, Discount = 10%
+	Order: $19.95
+
+Risky Customers
+Name: Kathy Naudot
+	Order: $29.99
+	Credit Score: 630
+Press <enter> to continue...

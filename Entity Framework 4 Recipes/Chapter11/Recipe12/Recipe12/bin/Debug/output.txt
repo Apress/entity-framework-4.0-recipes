@@ -1,0 +1,9 @@
+Query using eSql...
+Product Description: Family Camping Tent, Color Green
+Product Description: Chemical Light
+Product Description: Blue ground cover
+Query using LINQ...
+Family Camping Tent, Color Green
+Chemical Light
+Blue ground cover
+Press <enter> to continue...

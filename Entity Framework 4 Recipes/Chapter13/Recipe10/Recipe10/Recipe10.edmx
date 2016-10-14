@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="CreditCard" EntityType="EFRecipesModel.Store.CreditCard" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="Customer" EntityType="EFRecipesModel.Store.Customer" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="Transaction" EntityType="EFRecipesModel.Store.Transaction" store:Type="Tables" Schema="Chapter13" />
+          <AssociationSet Name="FK_CreditCard_Customer" Association="EFRecipesModel.Store.FK_CreditCard_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CreditCard" EntitySet="CreditCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_CreditCard" Association="EFRecipesModel.Store.FK_Transaction_CreditCard">
+            <End Role="CreditCard" EntitySet="CreditCard" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="CardNumber" />
+          </Key>
+          <Property Name="CardNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CardNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Scale="2" />
+        </EntityType>
+        <Association Name="FK_CreditCard_Customer">
+          <End Role="Customer" Type="EFRecipesModel.Store.Customer" Multiplicity="1" />
+          <End Role="CreditCard" Type="EFRecipesModel.Store.CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_CreditCard">
+          <End Role="CreditCard" Type="EFRecipesModel.Store.CreditCard" Multiplicity="1" />
+          <End Role="Transaction" Type="EFRecipesModel.Store.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCard">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CreditCards" EntityType="EFRecipesModel.CreditCard" />
+          <EntitySet Name="Customers" EntityType="EFRecipesModel.Customer" />
+          <EntitySet Name="Transactions" EntityType="EFRecipesModel.Transaction" />
+          <AssociationSet Name="FK_CreditCard_Customer" Association="EFRecipesModel.FK_CreditCard_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CreditCard" EntitySet="CreditCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_CreditCard" Association="EFRecipesModel.FK_Transaction_CreditCard">
+            <End Role="CreditCard" EntitySet="CreditCards" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CreditCard">
+          <Key>
+            <PropertyRef Name="CardNumber" />
+          </Key>
+          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="EFRecipesModel.FK_CreditCard_Customer" FromRole="CreditCard" ToRole="Customer" />
+          <NavigationProperty Name="Transactions" Relationship="EFRecipesModel.FK_Transaction_CreditCard" FromRole="CreditCard" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CreditCards" Relationship="EFRecipesModel.FK_CreditCard_Customer" FromRole="Customer" ToRole="CreditCard" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="CreditCard" Relationship="EFRecipesModel.FK_Transaction_CreditCard" FromRole="Transaction" ToRole="CreditCard" />
+        </EntityType>
+        <Association Name="FK_CreditCard_Customer">
+          <End Role="Customer" Type="EFRecipesModel.Customer" Multiplicity="1" />
+          <End Role="CreditCard" Type="EFRecipesModel.CreditCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CreditCard">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_CreditCard">
+          <End Role="CreditCard" Type="EFRecipesModel.CreditCard" Multiplicity="1" />
+          <End Role="Transaction" Type="EFRecipesModel.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditCard">
+              <PropertyRef Name="CardNumber" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="CardNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="CreditCards"><EntityTypeMapping TypeName="EFRecipesModel.CreditCard"><MappingFragment StoreEntitySet="CreditCard">
+            <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+            <ScalarProperty Name="Type" ColumnName="Type" />
+            <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+            <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Customers"><EntityTypeMapping TypeName="EFRecipesModel.Customer"><MappingFragment StoreEntitySet="Customer">
+            <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="City" ColumnName="City" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Transactions"><EntityTypeMapping TypeName="EFRecipesModel.Transaction"><MappingFragment StoreEntitySet="Transaction">
+            <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+            <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+            <ScalarProperty Name="Amount" ColumnName="Amount" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe10">
+        <EntityTypeShape EntityType="EFRecipesModel.CreditCard" Width="1.5" PointX="3" PointY="0.875" Height="2.1725878906250005" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Customer" Width="1.5" PointX="0.75" PointY="1.125" Height="1.7879850260416668" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Transaction" Width="1.5" PointX="5.25" PointY="1.125" Height="1.7879850260416668" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_CreditCard_Customer" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.0189925130208333" />
+          <ConnectorPoint PointX="3" PointY="2.0189925130208333" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.FK_Transaction_CreditCard" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.0189925130208333" />
+          <ConnectorPoint PointX="5.25" PointY="2.0189925130208333" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Person" EntityType="EFRecipesModel.Store.Person" store:Type="Tables" Schema="Chapter10" />
+        </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Degree" Type="varchar" MaxLength="50" />
+          <Property Name="Salary" Type="decimal" Scale="2" />
+          <Property Name="PersonType" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Function Name="GetAllPeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter10" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="People" EntityType="EFRecipesModel.Person" />
+<FunctionImport Name="GetAllPeople" EntitySet="People" ReturnType="Collection(EFRecipesModel.Person)" />
+        </EntityContainer>
+        <EntityType Name="Person" Abstract="true">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+<EntityType Name="Instructor" BaseType="EFRecipesModel.Person" >
+<Property Type="Decimal" Name="Salary" Nullable="false" Precision="18" Scale="2" /></EntityType>
+<EntityType Name="Student" BaseType="EFRecipesModel.Person" >
+<Property Type="String" Name="Degree" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" /></EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="People">
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Person)">
+<MappingFragment StoreEntitySet="Person">
+<ScalarProperty Name="PersonId" ColumnName="PersonId" />
+<ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Instructor)">
+<MappingFragment StoreEntitySet="Person">
+<ScalarProperty Name="PersonId" ColumnName="PersonId" />
+<ScalarProperty Name="Salary" ColumnName="Salary" />
+<Condition ColumnName="PersonType" Value="Instructor" /></MappingFragment></EntityTypeMapping>
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Student)">
+<MappingFragment StoreEntitySet="Person">
+<ScalarProperty Name="PersonId" ColumnName="PersonId" />
+<ScalarProperty Name="Degree" ColumnName="Degree" />
+<Condition ColumnName="PersonType" Value="Student" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllPeople" FunctionName="EFRecipesModel.Store.GetAllPeople">
+            <ResultMapping>
+              <EntityTypeMapping TypeName="EFRecipesModel.Student">
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <Condition ColumnName="PersonType" Value="Student"/>
+              </EntityTypeMapping>
+              <EntityTypeMapping TypeName="EFRecipesModel.Instructor">
+                <ScalarProperty Name="Salary" ColumnName="Salary"/>
+                <Condition ColumnName="PersonType" Value="Instructor"/>
+              </EntityTypeMapping>
+            </ResultMapping>            
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+<Diagram Name="Recipe7">
+<EntityTypeShape EntityType="EFRecipesModel.Person" Width="1.5" PointX="7.5" PointY="1.5" Height="1.4033821614583331" IsExpanded="true" />
+<EntityTypeShape EntityType="EFRecipesModel.Instructor" Width="1.5" PointX="6.5" PointY="4" Height="1.018779296875" />
+<InheritanceConnector EntityType="EFRecipesModel.Instructor">
+<ConnectorPoint PointX="8.25" PointY="2.9033821614583331" />
+<ConnectorPoint PointX="8.25" PointY="3.625" />
+<ConnectorPoint PointX="7.25" PointY="3.625" />
+<ConnectorPoint PointX="7.25" PointY="4" /></InheritanceConnector>
+<EntityTypeShape EntityType="EFRecipesModel.Student" Width="1.5" PointX="8.5" PointY="4" Height="1.018779296875" />
+<InheritanceConnector EntityType="EFRecipesModel.Student">
+<ConnectorPoint PointX="8.25" PointY="2.9033821614583331" />
+<ConnectorPoint PointX="8.25" PointY="3.625" />
+<ConnectorPoint PointX="9.25" PointY="3.625" />
+<ConnectorPoint PointX="9.25" PointY="4" /></InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

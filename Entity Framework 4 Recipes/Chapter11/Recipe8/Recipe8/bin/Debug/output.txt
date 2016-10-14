@@ -1,0 +1,4 @@
+Customers with above average total purchases
+	Bob Meyers, Total Orders: 1, Total: $99.39
+	Robin Rosen, Total Orders: 1, Total: $101.29
+Press <enter> to continue...

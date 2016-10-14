@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Friend" EntityType="EFRecipesModel.Store.Friend" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="Relative" EntityType="EFRecipesModel.Store.Relative" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="vwResidence" EntityType="EFRecipesModel.Store.vwResidence" store:Type="Views" store:Schema="Chapter15" store:Name="vwResidence">
+            <DefiningQuery>SELECT 
+      [vwResidence].[AddressId] AS [AddressId], 
+      [vwResidence].[Address] AS [Address], 
+      [vwResidence].[City] AS [City], 
+      [vwResidence].[State] AS [State], 
+      [vwResidence].[Zip] AS [Zip], 
+      [vwResidence].[FriendId] AS [FriendId], 
+      [vwResidence].[RelativeId] AS [RelativeId]
+      FROM [Chapter15].[vwResidence] AS [vwResidence]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Relative">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'EFRecipes.Chapter15.vwResidence' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="vwResidence">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="Zip" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="FriendId" Type="int" />
+          <Property Name="RelativeId" Type="int" />
+        </EntityType>
+        <Function Name="DeleteFriend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="PersonId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="PersonId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteResidence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="AddressId" Type="int" Mode="In" />
+          <Parameter Name="FriendId" Type="int" Mode="In" />
+          <Parameter Name="RelativeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertFriend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertResidence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="City" Type="varchar" Mode="In" />
+          <Parameter Name="State" Type="varchar" Mode="In" />
+          <Parameter Name="Zip" Type="varchar" Mode="In" />
+          <Parameter Name="FriendId" Type="int" Mode="In" />
+          <Parameter Name="RelativeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateFriend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="PersonId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="PersonId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateResidence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="AddressId" Type="int" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="City" Type="varchar" Mode="In" />
+          <Parameter Name="State" Type="varchar" Mode="In" />
+          <Parameter Name="Zip" Type="varchar" Mode="In" />
+          <Parameter Name="FriendId" Type="int" Mode="In" />
+          <Parameter Name="RelativeId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Friends" EntityType="EFRecipesModel.Friend" />
+          <EntitySet Name="Relatives" EntityType="EFRecipesModel.Relative" />
+          <EntitySet Name="Residences" EntityType="EFRecipesModel.Residence" />
+          <AssociationSet Name="ResidenceRelative" Association="EFRecipesModel.ResidenceRelative">
+            <End Role="Residence" EntitySet="Residences" />
+            <End Role="Relative" EntitySet="Relatives" /></AssociationSet>
+          <AssociationSet Name="ResidenceFriend" Association="EFRecipesModel.ResidenceFriend">
+            <End Role="Residence" EntitySet="Residences" />
+            <End Role="Friend" EntitySet="Friends" /></AssociationSet></EntityContainer>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Residences" Relationship="EFRecipesModel.ResidenceFriend" FromRole="Friend" ToRole="Residence" />
+        </EntityType>
+        <EntityType Name="Relative">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Residences" Relationship="EFRecipesModel.ResidenceRelative" FromRole="Relative" ToRole="Residence" />
+        </EntityType>
+        <EntityType Name="Residence">
+          <Key>
+            <PropertyRef Name="AddressId" />
+            </Key>
+          <Property Type="Int32" Name="AddressId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Zip" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="FriendId" Nullable="true" />
+          <Property Type="Int32" Name="RelativeId" Nullable="true" />
+          <NavigationProperty Name="Relatives" Relationship="EFRecipesModel.ResidenceRelative" FromRole="Residence" ToRole="Relative" />
+          <NavigationProperty Name="Friends" Relationship="EFRecipesModel.ResidenceFriend" FromRole="Residence" ToRole="Friend" /></EntityType>
+        <Association Name="ResidenceRelative">
+          <End Type="EFRecipesModel.Residence" Role="Residence" Multiplicity="*" />
+          <End Type="EFRecipesModel.Relative" Role="Relative" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Relative">
+              <PropertyRef Name="PersonId" /></Principal>
+            <Dependent Role="Residence">
+              <PropertyRef Name="RelativeId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="ResidenceFriend">
+          <End Type="EFRecipesModel.Residence" Role="Residence" Multiplicity="*" />
+          <End Type="EFRecipesModel.Friend" Role="Friend" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Friend">
+              <PropertyRef Name="PersonId" /></Principal>
+            <Dependent Role="Residence">
+              <PropertyRef Name="FriendId" /></Dependent></ReferentialConstraint></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Friends">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Friend)">
+              <MappingFragment StoreEntitySet="Friend">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EFRecipesModel.Friend">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertFriend">
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="PersonId" ColumnName="PersonId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateFriend">
+                  <ScalarProperty Name="PersonId" ParameterName="PersonId" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteFriend">
+                  <ScalarProperty Name="PersonId" ParameterName="PersonId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Relatives">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Relative)">
+              <MappingFragment StoreEntitySet="Relative">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EFRecipesModel.Relative">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertRelative">
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="PersonId" ColumnName="PersonId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateRelative">
+                  <ScalarProperty Name="PersonId" ParameterName="PersonId" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteRelative">
+                  <ScalarProperty Name="PersonId" ParameterName="PersonId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Residences">
+            
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Residence)">
+              <MappingFragment StoreEntitySet="vwResidence">
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="RelativeId" ColumnName="RelativeId" />
+                <ScalarProperty Name="FriendId" ColumnName="FriendId" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EFRecipesModel.Residence">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertResidence">
+                  <ScalarProperty Name="RelativeId" ParameterName="RelativeId" />
+                  <ScalarProperty Name="FriendId" ParameterName="FriendId" />
+                  <ScalarProperty Name="Zip" ParameterName="Zip" />
+                  <ScalarProperty Name="State" ParameterName="State" />
+                  <ScalarProperty Name="City" ParameterName="City" />
+                  <ScalarProperty Name="Address" ParameterName="Address" />
+                  <ResultBinding Name="AddressId" ColumnName="AddressId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateResidence">
+                  <ScalarProperty Name="RelativeId" ParameterName="RelativeId" Version="Current" />
+                  <ScalarProperty Name="FriendId" ParameterName="FriendId" Version="Current" />
+                  <ScalarProperty Name="Zip" ParameterName="Zip" Version="Current" />
+                  <ScalarProperty Name="State" ParameterName="State" Version="Current" />
+                  <ScalarProperty Name="City" ParameterName="City" Version="Current" />
+                  <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+                  <ScalarProperty Name="AddressId" ParameterName="AddressId" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteResidence">
+                  <ScalarProperty Name="RelativeId" ParameterName="RelativeId" />
+                  <ScalarProperty Name="FriendId" ParameterName="FriendId" />
+                  <ScalarProperty Name="AddressId" ParameterName="AddressId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe7">
+        <EntityTypeShape EntityType="EFRecipesModel.Friend" Width="1.5" PointX="5.25" PointY="2.875" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Relative" Width="1.5" PointX="5.25" PointY="5.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Residence" Width="1.5" PointX="3" PointY="3.625" Height="2.364889322916667" />
+        <AssociationConnector Association="EFRecipesModel.ResidenceRelative">
+          <ConnectorPoint PointX="4.5" PointY="5.87474609375" />
+          <ConnectorPoint PointX="5.25" PointY="5.87474609375" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.ResidenceFriend">
+          <ConnectorPoint PointX="4.5" PointY="4.047841796875" />
+          <ConnectorPoint PointX="5.25" PointY="4.047841796875" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,8 @@
+
+Job: Re-surface Parking Log
+	Bid: $948.00 from ABC Paving
+	Bid: $1,028.00 from TopCoat Paving
+
+Job: Build Driveway
+	Bid: $502.00 from Ace Concrete
+Press <enter> to continue...

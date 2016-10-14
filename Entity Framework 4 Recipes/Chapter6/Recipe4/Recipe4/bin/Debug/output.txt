@@ -1,0 +1,16 @@
+
+Susan Smith, Hero is: Joan Collins
+Teacher at Custer Baker Middle School
+Fans:
+	Joel Clark
+
+Joel Clark, Hero is: Susan Smith
+Firefighter at station Midtown
+Fans:
+	Joan Collins
+
+Joan Collins, Hero is: Joel Clark
+Retired, hobby is Scapbooking
+Fans:
+	Susan Smith
+Press <enter> to continue...

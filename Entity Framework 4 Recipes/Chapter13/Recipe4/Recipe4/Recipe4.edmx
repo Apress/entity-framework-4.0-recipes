@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Accountant" EntityType="EFRecipesModel.Store.Accountant" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="Client" EntityType="EFRecipesModel.Store.Client" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="College" EntityType="EFRecipesModel.Store.College" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="CourtDate" EntityType="EFRecipesModel.Store.CourtDate" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="Lawyer" EntityType="EFRecipesModel.Store.Lawyer" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="Person" EntityType="EFRecipesModel.Store.Person" store:Type="Tables" Schema="Chapter13" />
+          <AssociationSet Name="FK_Accountant_Person" Association="EFRecipesModel.Store.FK_Accountant_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Accountant" EntitySet="Accountant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Accountant1" Association="EFRecipesModel.Store.FK_Client_Accountant1">
+            <End Role="Accountant" EntitySet="Accountant" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourtDate_Lawyer" Association="EFRecipesModel.Store.FK_CourtDate_Lawyer">
+            <End Role="Lawyer" EntitySet="Lawyer" />
+            <End Role="CourtDate" EntitySet="CourtDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lawyer_Person" Association="EFRecipesModel.Store.FK_Lawyer_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Lawyer" EntitySet="Lawyer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_College" Association="EFRecipesModel.Store.FK_Person_College">
+            <End Role="College" EntitySet="College" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accountant">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AccountantId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="College">
+          <Key>
+            <PropertyRef Name="CollegeId" />
+          </Key>
+          <Property Name="CollegeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CourtDate">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CourtDate" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LawyerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lawyer">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CollegeId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accountant_Person">
+          <End Role="Person" Type="EFRecipesModel.Store.Person" Multiplicity="1" />
+          <End Role="Accountant" Type="EFRecipesModel.Store.Accountant" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Accountant">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Accountant1">
+          <End Role="Accountant" Type="EFRecipesModel.Store.Accountant" Multiplicity="1" />
+          <End Role="Client" Type="EFRecipesModel.Store.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accountant">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="AccountantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourtDate_Lawyer">
+          <End Role="Lawyer" Type="EFRecipesModel.Store.Lawyer" Multiplicity="1" />
+          <End Role="CourtDate" Type="EFRecipesModel.Store.CourtDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyer">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="CourtDate">
+              <PropertyRef Name="LawyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lawyer_Person">
+          <End Role="Person" Type="EFRecipesModel.Store.Person" Multiplicity="1" />
+          <End Role="Lawyer" Type="EFRecipesModel.Store.Lawyer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Lawyer">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_College">
+          <End Role="College" Type="EFRecipesModel.Store.College" Multiplicity="1" />
+          <End Role="Person" Type="EFRecipesModel.Store.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="College">
+              <PropertyRef Name="CollegeId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="CollegeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="EFRecipesModel.Client" />
+          <EntitySet Name="Colleges" EntityType="EFRecipesModel.College" />
+          <EntitySet Name="CourtDates" EntityType="EFRecipesModel.CourtDate" />
+          <EntitySet Name="People" EntityType="EFRecipesModel.Person" />
+          <AssociationSet Name="FK_Client_Accountant1" Association="EFRecipesModel.FK_Client_Accountant1">
+            <End Role="Accountant" EntitySet="People" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_College" Association="EFRecipesModel.FK_Person_College">
+            <End Role="College" EntitySet="Colleges" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourtDate_Lawyer" Association="EFRecipesModel.FK_CourtDate_Lawyer">
+            <End Role="Lawyer" EntitySet="People" />
+            <End Role="CourtDate" EntitySet="CourtDates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accountant" BaseType="EFRecipesModel.Person">
+          <NavigationProperty Name="Clients" Relationship="EFRecipesModel.FK_Client_Accountant1" FromRole="Accountant" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="AccountantId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accountant" Relationship="EFRecipesModel.FK_Client_Accountant1" FromRole="Client" ToRole="Accountant" />
+        </EntityType>
+        <EntityType Name="College">
+          <Key>
+            <PropertyRef Name="CollegeId" />
+          </Key>
+          <Property Name="CollegeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="People" Relationship="EFRecipesModel.FK_Person_College" FromRole="College" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="CourtDate">
+          <Key>
+            <PropertyRef Name="AppointmentId" />
+          </Key>
+          <Property Name="AppointmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Appointment" Type="DateTime" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LawyerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lawyer" Relationship="EFRecipesModel.FK_CourtDate_Lawyer" FromRole="CourtDate" ToRole="Lawyer" />
+        </EntityType>
+        <EntityType Name="Lawyer" BaseType="EFRecipesModel.Person">
+          <NavigationProperty Name="CourtDates" Relationship="EFRecipesModel.FK_CourtDate_Lawyer" FromRole="Lawyer" ToRole="CourtDate" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CollegeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="College" Relationship="EFRecipesModel.FK_Person_College" FromRole="Person" ToRole="College" />
+        </EntityType>
+        <Association Name="FK_Client_Accountant1">
+          <End Role="Accountant" Type="EFRecipesModel.Accountant" Multiplicity="1" />
+          <End Role="Client" Type="EFRecipesModel.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accountant">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="AccountantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_College">
+          <End Role="College" Type="EFRecipesModel.College" Multiplicity="1" />
+          <End Role="Person" Type="EFRecipesModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="College">
+              <PropertyRef Name="CollegeId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="CollegeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourtDate_Lawyer">
+          <End Role="Lawyer" Type="EFRecipesModel.Lawyer" Multiplicity="1" />
+          <End Role="CourtDate" Type="EFRecipesModel.CourtDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyer">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="CourtDate">
+              <PropertyRef Name="LawyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Clients"><EntityTypeMapping TypeName="EFRecipesModel.Client"><MappingFragment StoreEntitySet="Client">
+            <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="AccountantId" ColumnName="AccountantId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Colleges"><EntityTypeMapping TypeName="EFRecipesModel.College"><MappingFragment StoreEntitySet="College">
+            <ScalarProperty Name="CollegeId" ColumnName="CollegeId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CourtDates"><EntityTypeMapping TypeName="EFRecipesModel.CourtDate"><MappingFragment StoreEntitySet="CourtDate">
+            <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+            <ScalarProperty Name="Appointment" ColumnName="CourtDate" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="LawyerId" ColumnName="LawyerId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Person)">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CollegeId" ColumnName="CollegeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Accountant)">
+              <MappingFragment StoreEntitySet="Accountant">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Lawyer)">
+              <MappingFragment StoreEntitySet="Lawyer">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe4">
+        <EntityTypeShape EntityType="EFRecipesModel.Accountant" Width="1.5" PointX="2.125" PointY="3.125" Height="1.2110807291666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Client" Width="1.5" PointX="2.125" PointY="4.875" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.College" Width="1.5" PointX="5.625" PointY="0.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.CourtDate" Width="1.5" PointX="4.75" PointY="4.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Lawyer" Width="1.5" PointX="4.75" PointY="3.125" Height="1.2110807291666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Person" Width="1.5" PointX="3.375" PointY="0.5" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Client_Accountant1" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.875" PointY="4.3360807291666665" />
+          <ConnectorPoint PointX="2.875" PointY="4.875" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.FK_Person_College" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.625" PointY="1.2978417968749998" />
+          <ConnectorPoint PointX="4.875" PointY="1.2978417968749998" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.FK_CourtDate_Lawyer" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.5" PointY="4.3360807291666665" />
+          <ConnectorPoint PointX="5.5" PointY="4.875" /></AssociationConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.Accountant">
+          <ConnectorPoint PointX="4.125" PointY="2.287985026041667" />
+          <ConnectorPoint PointX="4.125" PointY="2.75" />
+          <ConnectorPoint PointX="2.875" PointY="2.75" />
+          <ConnectorPoint PointX="2.875" PointY="3.125" /></InheritanceConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.Lawyer">
+          <ConnectorPoint PointX="4.125" PointY="2.287985026041667" />
+          <ConnectorPoint PointX="4.125" PointY="2.75" />
+          <ConnectorPoint PointX="5.5" PointY="2.75" />
+          <ConnectorPoint PointX="5.5" PointY="3.125" /></InheritanceConnector>
+        </Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

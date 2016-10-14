@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Drug" EntityType="EFRecipesModel.Store.Drug" store:Type="Tables" Schema="Chapter6" />
+        </EntityContainer>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TargetPrice" Type="decimal" Scale="2" />
+          <Property Name="PrincipalResearcher" Type="varchar" MaxLength="50" />
+          <Property Name="AcceptedDate" Type="datetime" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Drugs" EntityType="EFRecipesModel.Drug" />
+        </EntityContainer>
+        <EntityType Name="Drug" Abstract="true">
+          <Key>
+            <PropertyRef Name="DrugId" />
+          </Key>
+          <Property Name="DrugId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Experimental" BaseType="EFRecipesModel.Drug" >
+          <Property Type="String" Name="PrincipalResearcher" Nullable="true" MaxLength="50" FixedLength="false" Unicode="false" /></EntityType>
+        <EntityType Name="Medicine" BaseType="EFRecipesModel.Drug" >
+          <Property Type="Decimal" Name="TargetPrice" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="AcceptedDate" Nullable="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Drugs">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Drug)">
+              <MappingFragment StoreEntitySet="Drug">
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Medicine)">
+              <MappingFragment StoreEntitySet="Drug">
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="AcceptedDate" ColumnName="AcceptedDate" />
+                <ScalarProperty Name="TargetPrice" ColumnName="TargetPrice" />
+                <Condition ColumnName="AcceptedDate" IsNull="false" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Experimental)">
+              <MappingFragment StoreEntitySet="Drug">
+                <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+                <ScalarProperty Name="PrincipalResearcher" ColumnName="PrincipalResearcher" />
+                <Condition ColumnName="AcceptedDate" IsNull="true" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe6">
+        <EntityTypeShape EntityType="EFRecipesModel.Drug" Width="1.75" PointX="2.625" PointY="1.125" Height="1.4033821614583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Experimental" Width="1.625" PointX="3.875" PointY="3.25" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.Experimental" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.71875" PointY="2.5283821614583326" />
+          <ConnectorPoint PointX="3.71875" PointY="2.875" />
+          <ConnectorPoint PointX="4.5972222222222214" PointY="2.875" />
+          <ConnectorPoint PointX="4.5972222222222214" PointY="3.25" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.Medicine" Width="1.5" PointX="1.625" PointY="3.25" Height="1.4033821614583326" />
+        <InheritanceConnector EntityType="EFRecipesModel.Medicine" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.1875" PointY="2.5283821614583326" />
+          <ConnectorPoint PointX="3.1875" PointY="2.875" />
+          <ConnectorPoint PointX="2.375" PointY="2.875" />
+          <ConnectorPoint PointX="2.375" PointY="3.25" />
+          </InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

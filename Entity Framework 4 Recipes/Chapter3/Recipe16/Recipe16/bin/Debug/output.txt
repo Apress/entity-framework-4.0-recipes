@@ -1,0 +1,13 @@
+Using LINQ...
+Associate Salary History
+Bill Jordan Salary on 10/8/2009 was $33,500.00
+Janis Roberts --
+Kevin Hodges Salary on 8/14/2009 was $39,500.00
+Kevin Hodges Salary on 2/5/2010 was $41,900.00
+
+Using Entity SQL...
+Bill Jordan Salary on 10/8/2009 was $33,500.00
+Janis Roberts --
+Kevin Hodges Salary on 8/14/2009 was $39,500.00
+Kevin Hodges Salary on 2/5/2010 was $41,900.00
+Press <enter> to continue...

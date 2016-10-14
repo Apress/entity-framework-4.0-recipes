@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Associate" EntityType="EFRecipesModel.Store.Associate" store:Type="Tables" Schema="Chapter13" />
+          <EntitySet Name="Paycheck" EntityType="EFRecipesModel.Store.Paycheck" store:Type="Tables" Schema="Chapter13" />
+          <AssociationSet Name="FK_Pay_Associate" Association="EFRecipesModel.Store.FK_Pay_Associate">
+            <End Role="Associate" EntitySet="Associate" />
+            <End Role="Paycheck" EntitySet="Paycheck" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Associate">
+          <Key>
+            <PropertyRef Name="AssociateId" />
+          </Key>
+          <Property Name="AssociateId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Paycheck">
+          <Key>
+            <PropertyRef Name="PayCheckId" />
+          </Key>
+          <Property Name="PayCheckId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AssociateId" Type="int" Nullable="false" />
+          <Property Name="PayDate" Type="datetime" Nullable="false" />
+          <Property Name="Gross" Type="decimal" Nullable="false" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Pay_Associate">
+          <End Role="Associate" Type="EFRecipesModel.Store.Associate" Multiplicity="1" />
+          <End Role="Paycheck" Type="EFRecipesModel.Store.Paycheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Associate">
+              <PropertyRef Name="AssociateId" />
+            </Principal>
+            <Dependent Role="Paycheck">
+              <PropertyRef Name="AssociateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Associates" EntityType="EFRecipesModel.Associate" />
+          <EntitySet Name="Paychecks" EntityType="EFRecipesModel.Paycheck" />
+          <AssociationSet Name="FK_Pay_Associate" Association="EFRecipesModel.FK_Pay_Associate">
+            <End Role="Associate" EntitySet="Associates" />
+            <End Role="Paycheck" EntitySet="Paychecks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Associate">
+          <Key>
+            <PropertyRef Name="AssociateId" />
+          </Key>
+          <Property Name="AssociateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Paychecks" Relationship="EFRecipesModel.FK_Pay_Associate" FromRole="Associate" ToRole="Paycheck" />
+        </EntityType>
+        <EntityType Name="Paycheck">
+          <Key>
+            <PropertyRef Name="PayCheckId" />
+          </Key>
+          <Property Name="PayCheckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssociateId" Type="Int32" Nullable="false" />
+          <Property Name="PayDate" Type="DateTime" Nullable="false" />
+          <Property Name="Gross" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Associate" Relationship="EFRecipesModel.FK_Pay_Associate" FromRole="Paycheck" ToRole="Associate" />
+        </EntityType>
+        <Association Name="FK_Pay_Associate">
+          <End Role="Associate" Type="EFRecipesModel.Associate" Multiplicity="1" />
+          <End Role="Paycheck" Type="EFRecipesModel.Paycheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Associate">
+              <PropertyRef Name="AssociateId" />
+            </Principal>
+            <Dependent Role="Paycheck">
+              <PropertyRef Name="AssociateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Associates"><EntityTypeMapping TypeName="EFRecipesModel.Associate"><MappingFragment StoreEntitySet="Associate">
+            <ScalarProperty Name="AssociateId" ColumnName="AssociateId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="City" ColumnName="City" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Paychecks"><EntityTypeMapping TypeName="EFRecipesModel.Paycheck"><MappingFragment StoreEntitySet="Paycheck">
+            <ScalarProperty Name="PayCheckId" ColumnName="PayCheckId" />
+            <ScalarProperty Name="AssociateId" ColumnName="AssociateId" />
+            <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+            <ScalarProperty Name="Gross" ColumnName="Gross" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe7">
+        <EntityTypeShape EntityType="EFRecipesModel.Associate" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416668" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Paycheck" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Pay_Associate" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.8939925130208333" />
+          <ConnectorPoint PointX="3" PointY="1.8939925130208333" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

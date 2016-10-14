@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Product" EntityType="EFRecipesModel.Store.Product" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="RelatedProduct" EntityType="EFRecipesModel.Store.RelatedProduct" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_RelatedProduct_Product" Association="EFRecipesModel.Store.FK_RelatedProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="RelatedProduct" EntitySet="RelatedProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RelatedProduct_Product1" Association="EFRecipesModel.Store.FK_RelatedProduct_Product1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="RelatedProduct" EntitySet="RelatedProduct" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Nullable="false" Scale="2" />
+        </EntityType>
+        <EntityType Name="RelatedProduct">
+          <Key>
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="RelatedProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="RelatedProductId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RelatedProduct_Product">
+          <End Role="Product" Type="EFRecipesModel.Store.Product" Multiplicity="1" />
+          <End Role="RelatedProduct" Type="EFRecipesModel.Store.RelatedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="RelatedProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RelatedProduct_Product1">
+          <End Role="Product" Type="EFRecipesModel.Store.Product" Multiplicity="1" />
+          <End Role="RelatedProduct" Type="EFRecipesModel.Store.RelatedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="RelatedProduct">
+              <PropertyRef Name="RelatedProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Products" EntityType="EFRecipesModel.Product" />
+          <AssociationSet Name="RelatedProduct" Association="EFRecipesModel.RelatedProduct">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product1" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="RelatedProducts" Relationship="EFRecipesModel.RelatedProduct" FromRole="Product" ToRole="Product1" />
+          <NavigationProperty Name="OtherRelatedProducts" Relationship="EFRecipesModel.RelatedProduct" FromRole="Product1" ToRole="Product" />
+        </EntityType>
+        <Association Name="RelatedProduct">
+          <End Role="Product" Type="EFRecipesModel.Product" Multiplicity="*" />
+          <End Role="Product1" Type="EFRecipesModel.Product" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Products"><EntityTypeMapping TypeName="EFRecipesModel.Product"><MappingFragment StoreEntitySet="Product">
+            <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="RelatedProduct" TypeName="EFRecipesModel.RelatedProduct" StoreEntitySet="RelatedProduct">
+            <EndProperty Name="Product">
+              <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+            </EndProperty>
+            <EndProperty Name="Product1">
+              <ScalarProperty Name="ProductId" ColumnName="RelatedProductId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe3">
+        <EntityTypeShape EntityType="EFRecipesModel.Product" Width="1.875" PointX="0.75" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.RelatedProduct" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.4149038461538464" PointY="2.7302864583333335" />
+          <ConnectorPoint PointX="1.4149038461538464" PointY="2.9802864583333335" />
+          <ConnectorPoint PointX="1.9730769230769232" PointY="2.9802864583333335" />
+          <ConnectorPoint PointX="1.9730769230769232" PointY="2.7302864583333335" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

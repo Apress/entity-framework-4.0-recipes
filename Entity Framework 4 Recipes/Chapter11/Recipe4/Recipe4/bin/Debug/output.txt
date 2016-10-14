@@ -1,0 +1,14 @@
+Using eSql...
+Team members that report up to either
+Project Manager Jill Masterson 
+or Supervisor Steve Johnson
+	Associate: Nancy Jones
+	Associate: Stacy Rutgers
+
+Using LINQ...
+Team members that report up to either
+Project Manager Jill Masterson 
+or Supervisor Steve Johnson
+	Associate: Nancy Jones
+	Associate: Stacy Rutgers
+Press <enter> to continue...

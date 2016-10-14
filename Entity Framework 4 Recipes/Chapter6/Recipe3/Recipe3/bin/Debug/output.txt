@@ -1,0 +1,10 @@
+Product: Tent ... $199.95
+Related Products
+	Ground Cover ... $29.95
+	Pole ... $12.97
+Press <enter> to continue...
+Products related to Pole
+	Tent
+	Ground Cover
+	Pole
+Press <enter> to continue...

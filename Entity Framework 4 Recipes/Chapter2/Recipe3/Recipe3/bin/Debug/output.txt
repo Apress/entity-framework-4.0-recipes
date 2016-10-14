@@ -1,0 +1,18 @@
+Artists and their albums...
+Alan Jackson
+	Drive
+	Live at Texas Stadium
+Tobby Keith
+	Honkytonk University
+Merle Haggard
+	Honkytonk University
+
+Albums and their artists...
+Drive
+	Alan Jackson
+Live at Texas Stadium
+	Alan Jackson
+Honkytonk University
+	Tobby Keith
+	Merle Haggard
+Press <enter> to continue...

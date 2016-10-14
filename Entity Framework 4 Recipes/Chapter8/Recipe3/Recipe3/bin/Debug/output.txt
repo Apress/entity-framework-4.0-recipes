@@ -1,0 +1,6 @@
+ Ticket: 7, Total Cost: $175.00
+	20 MPH over the speed limit
+	Broken tail light
+ Ticket: 8, Total Cost: $35.00
+	Parking in a no parking zone
+Press <enter> to continue...

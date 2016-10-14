@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Friend" EntityType="EFRecipesModel.Store.Friend" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="Relative" EntityType="EFRecipesModel.Store.Relative" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="Residence" EntityType="EFRecipesModel.Store.Residence" store:Type="Tables" Schema="Chapter15" />
+        </EntityContainer>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Relative">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Residence">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="ZIP" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="PersonType" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Friends" EntityType="EFRecipesModel.Friend" />
+          <EntitySet Name="Relatives" EntityType="EFRecipesModel.Relative" />
+          <EntitySet Name="Residences" EntityType="EFRecipesModel.Residence" />
+          <AssociationSet Name="RelativeRelativeResidence" Association="EFRecipesModel.RelativeRelativeResidence">
+            <End Role="Relative" EntitySet="Relatives" />
+            <End Role="RelativeResidence" EntitySet="Residences" /></AssociationSet>
+          <AssociationSet Name="FriendFriendResidence" Association="EFRecipesModel.FriendFriendResidence">
+            <End Role="Friend" EntitySet="Friends" />
+            <End Role="FriendResidence" EntitySet="Residences" /></AssociationSet></EntityContainer>
+        <EntityType Name="Friend">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FriendResidence" Relationship="EFRecipesModel.FriendFriendResidence" FromRole="Friend" ToRole="FriendResidence" />
+        </EntityType>
+        <EntityType Name="Relative">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="RelativeResidence" Relationship="EFRecipesModel.RelativeRelativeResidence" FromRole="Relative" ToRole="RelativeResidence" />
+        </EntityType>
+        <EntityType Name="Residence" Abstract="true">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="ZIP" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          </EntityType>
+        <EntityType Name="RelativeResidence" BaseType="EFRecipesModel.Residence" >
+          <NavigationProperty Name="Relative" Relationship="EFRecipesModel.RelativeRelativeResidence" FromRole="RelativeResidence" ToRole="Relative" /></EntityType>
+        <EntityType Name="FriendResidence" BaseType="EFRecipesModel.Residence" >
+          <NavigationProperty Name="Friend" Relationship="EFRecipesModel.FriendFriendResidence" FromRole="FriendResidence" ToRole="Friend" /></EntityType>
+        <Association Name="RelativeRelativeResidence">
+          <End Type="EFRecipesModel.Relative" Role="Relative" Multiplicity="1" />
+          <End Type="EFRecipesModel.RelativeResidence" Role="RelativeResidence" Multiplicity="1" /></Association>
+        <Association Name="FriendFriendResidence">
+          <End Type="EFRecipesModel.Friend" Role="Friend" Multiplicity="1" />
+          <End Type="EFRecipesModel.FriendResidence" Role="FriendResidence" Multiplicity="1" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Friends"><EntityTypeMapping TypeName="EFRecipesModel.Friend"><MappingFragment StoreEntitySet="Friend">
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Relatives"><EntityTypeMapping TypeName="EFRecipesModel.Relative"><MappingFragment StoreEntitySet="Relative">
+            <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Residences">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Residence)">
+              <MappingFragment StoreEntitySet="Residence">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.RelativeResidence)">
+              <MappingFragment StoreEntitySet="Residence">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <Condition ColumnName="PersonType" Value="Relative" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.FriendResidence)">
+              <MappingFragment StoreEntitySet="Residence">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <Condition ColumnName="PersonType" Value="Friend" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          
+          <AssociationSetMapping Name="RelativeRelativeResidence" TypeName="EFRecipesModel.RelativeRelativeResidence" StoreEntitySet="Residence">
+            <EndProperty Name="RelativeResidence">
+              <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+            </EndProperty>
+            <EndProperty Name="Relative">
+              <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            </EndProperty>
+            <Condition ColumnName="PersonType" Value="Relative" />
+          </AssociationSetMapping>
+          
+          <AssociationSetMapping Name="FriendFriendResidence" TypeName="EFRecipesModel.FriendFriendResidence" StoreEntitySet="Residence">
+            <EndProperty Name="FriendResidence">
+              <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+            </EndProperty>
+            <EndProperty Name="Friend">
+              <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+            </EndProperty>
+            <Condition ColumnName="PersonType" Value="Friend" />
+          </AssociationSetMapping>
+          
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe8">
+        <EntityTypeShape EntityType="EFRecipesModel.Friend" Width="1.5" PointX="0.625" PointY="4.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Relative" Width="1.5" PointX="6.75" PointY="4.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Residence" Width="1.5" PointX="3.625" PointY="1.5" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.RelativeResidence" Width="1.75" PointX="4.5" PointY="4.5" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.RelativeResidence">
+          <ConnectorPoint PointX="4.6979166666666661" PointY="3.4802864583333326" />
+          <ConnectorPoint PointX="4.6979166666666661" PointY="4.125" />
+          <ConnectorPoint PointX="5.375" PointY="4.125" />
+          <ConnectorPoint PointX="5.375" PointY="4.5" /></InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.FriendResidence" Width="1.5" PointX="2.75" PointY="4.5" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.FriendResidence">
+          <ConnectorPoint PointX="4.1041666666666661" PointY="3.4802864583333326" />
+          <ConnectorPoint PointX="4.1041666666666661" PointY="4.125" />
+          <ConnectorPoint PointX="3.5" PointY="4.125" />
+          <ConnectorPoint PointX="3.5" PointY="4.5" /></InheritanceConnector>
+        <AssociationConnector Association="EFRecipesModel.RelativeRelativeResidence">
+          <ConnectorPoint PointX="6.75" PointY="5.1055403645833337" />
+          <ConnectorPoint PointX="6.25" PointY="5.1055403645833337" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.FriendFriendResidence">
+          <ConnectorPoint PointX="2.125" PointY="5.1055403645833337" />
+          <ConnectorPoint PointX="2.75" PointY="5.1055403645833337" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

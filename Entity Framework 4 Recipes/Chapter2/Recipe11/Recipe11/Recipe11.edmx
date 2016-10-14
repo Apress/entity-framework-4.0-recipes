@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Location" EntityType="EFRecipesModel.Store.Location" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="Park" EntityType="EFRecipesModel.Store.Park" store:Type="Tables" Schema="Chapter2" />
+          <AssociationSet Name="FK_Park_Location" Association="EFRecipesModel.Store.FK_Park_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Park" EntitySet="Park" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Park_Location1" Association="EFRecipesModel.Store.FK_Park_Location1">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Park" EntitySet="Park" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="ZIPCode" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Park">
+          <Key>
+            <PropertyRef Name="ParkId" />
+          </Key>
+          <Property Name="ParkId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="OfficeLocationId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Park_Location">
+          <End Role="Location" Type="EFRecipesModel.Store.Location" Multiplicity="1" />
+          <End Role="Park" Type="EFRecipesModel.Store.Park" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Park">
+              <PropertyRef Name="ParkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Park_Location1">
+          <End Role="Location" Type="EFRecipesModel.Store.Location" Multiplicity="1" />
+          <End Role="Park" Type="EFRecipesModel.Store.Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Park">
+              <PropertyRef Name="OfficeLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Locations" EntityType="EFRecipesModel.Location" />
+          <AssociationSet Name="FK_Park_Location1" Association="EFRecipesModel.FK_Park_Location1">
+            <End EntitySet="Locations" Role="Location" />
+            <End EntitySet="Locations" Role="Park" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="ZIPCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Parks" Relationship="EFRecipesModel.FK_Park_Location1" FromRole="Location" ToRole="Park" />
+        </EntityType>
+        <EntityType Name="Park" BaseType="EFRecipesModel.Location">
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="OfficeLocationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Office" Relationship="EFRecipesModel.FK_Park_Location1" FromRole="Park" ToRole="Location" />
+        </EntityType>
+        <Association Name="FK_Park_Location1">
+          <End Type="EFRecipesModel.Location" Multiplicity="1" Role="Location" />
+          <End Type="EFRecipesModel.Park" Multiplicity="*" Role="Park" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Park">
+              <PropertyRef Name="OfficeLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Location)">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="ZIPCode" ColumnName="ZIPCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Park)">
+              <MappingFragment StoreEntitySet="Park">
+                <ScalarProperty Name="LocationId" ColumnName="ParkId" />
+                <ScalarProperty Name="OfficeLocationId" ColumnName="OfficeLocationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe11">
+        <EntityTypeShape EntityType="EFRecipesModel.Location" Width="1.5" PointX="0.75" PointY="1" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Park" Width="1.5" PointX="3" PointY="1.125" Height="1.59568359375" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="EFRecipesModel.FK_Park_Location1">
+          <ConnectorPoint PointX="2.25" PointY="2.1775899251302082" />
+          <ConnectorPoint PointX="3" PointY="2.1775899251302082" /></AssociationConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.Park">
+          <ConnectorPoint PointX="2.25" PointY="1.5887949625651041" />
+          <ConnectorPoint PointX="3" PointY="1.5887949625651041" /></InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

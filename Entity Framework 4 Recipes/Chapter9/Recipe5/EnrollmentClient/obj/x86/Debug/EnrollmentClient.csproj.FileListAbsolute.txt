@@ -1,0 +1,11 @@
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\bin\Debug\EnrollmentClient.exe.config
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\bin\Debug\EnrollmentClient.exe
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\bin\Debug\EnrollmentClient.pdb
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\bin\Debug\EnrollmentEntities.dll
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\bin\Debug\EnrollmentEntities.pdb
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\obj\x86\Debug\EnrollmentClient.exe
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\obj\x86\Debug\EnrollmentClient.pdb
+M:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\bin\Debug\EnrollmentClient.exe.config
+M:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\obj\x86\Debug\EnrollmentClient.exe
+M:\Book Work\Code\Chapter9\Recipe5\EnrollmentClient\obj\x86\Debug\EnrollmentClient.pdb

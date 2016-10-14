@@ -1,0 +1,15 @@
+Robert Jones has 2 order(s)
+	Ordered on: 11/19/2009
+	Status: Shipped
+	Ship via: FedEx
+
+	Ordered on: 12/13/2009
+	Status: Processing
+	Ship via: UPS
+
+Julia Stevens has 1 order(s)
+	Ordered on: 10/19/2009
+	Status: Shipped
+	Ship via: FedEx
+
+Press <enter> to continue...

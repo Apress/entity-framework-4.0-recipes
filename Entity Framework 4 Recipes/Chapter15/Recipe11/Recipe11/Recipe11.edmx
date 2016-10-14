@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="CreditReport" EntityType="EFRecipesModel.Store.CreditReport" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="CreditRiskCustomer" EntityType="EFRecipesModel.Store.CreditRiskCustomer" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="CreditRiskOrder" EntityType="EFRecipesModel.Store.CreditRiskOrder" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="CustomerDiscount" EntityType="EFRecipesModel.Store.CustomerDiscount" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="PreferredCustomer" EntityType="EFRecipesModel.Store.PreferredCustomer" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="PreferredOrder" EntityType="EFRecipesModel.Store.PreferredOrder" store:Type="Tables" Schema="Chapter15" />
+          <AssociationSet Name="FK_CreditReport_CreditRiskCustomer" Association="EFRecipesModel.Store.FK_CreditReport_CreditRiskCustomer">
+            <End Role="CreditRiskCustomer" EntitySet="CreditRiskCustomer" />
+            <End Role="CreditReport" EntitySet="CreditReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CreditRiskOrder_CreditRiskCustomer" Association="EFRecipesModel.Store.FK_CreditRiskOrder_CreditRiskCustomer">
+            <End Role="CreditRiskCustomer" EntitySet="CreditRiskCustomer" />
+            <End Role="CreditRiskOrder" EntitySet="CreditRiskOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDiscount_PreferredCustomer" Association="EFRecipesModel.Store.FK_CustomerDiscount_PreferredCustomer">
+            <End Role="PreferredCustomer" EntitySet="PreferredCustomer" />
+            <End Role="CustomerDiscount" EntitySet="CustomerDiscount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreferredOrder_PreferredCustomer" Association="EFRecipesModel.Store.FK_PreferredOrder_PreferredCustomer">
+            <End Role="PreferredCustomer" EntitySet="PreferredCustomer" />
+            <End Role="PreferredOrder" EntitySet="PreferredOrder" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CreditReport">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CreditRating" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditRiskCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CreditRiskOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerDiscount">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="PurchaseDiscount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreferredCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PreferredOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CreditReport_CreditRiskCustomer">
+          <End Role="CreditRiskCustomer" Type="EFRecipesModel.Store.CreditRiskCustomer" Multiplicity="1" />
+          <End Role="CreditReport" Type="EFRecipesModel.Store.CreditReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditRiskCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CreditReport">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CreditRiskOrder_CreditRiskCustomer">
+          <End Role="CreditRiskCustomer" Type="EFRecipesModel.Store.CreditRiskCustomer" Multiplicity="1" />
+          <End Role="CreditRiskOrder" Type="EFRecipesModel.Store.CreditRiskOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditRiskCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CreditRiskOrder">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDiscount_PreferredCustomer">
+          <End Role="PreferredCustomer" Type="EFRecipesModel.Store.PreferredCustomer" Multiplicity="1" />
+          <End Role="CustomerDiscount" Type="EFRecipesModel.Store.CustomerDiscount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PreferredCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CustomerDiscount">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreferredOrder_PreferredCustomer">
+          <End Role="PreferredCustomer" Type="EFRecipesModel.Store.PreferredCustomer" Multiplicity="1" />
+          <End Role="PreferredOrder" Type="EFRecipesModel.Store.PreferredOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreferredCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="PreferredOrder">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="PreferredCustomers" EntityType="EFRecipesModel.Customer" />
+          <EntitySet Name="RiskyCustomers" EntityType="EFRecipesModel.Customer" />
+          <EntitySet Name="PreferredOrders" EntityType="EFRecipesModel.Order" />
+          <EntitySet Name="RiskyOrders" EntityType="EFRecipesModel.Order" />
+          
+          <EntitySet Name="CreditReports" EntityType="EFRecipesModel.CreditReport" />
+          <EntitySet Name="CustomerDiscounts" EntityType="EFRecipesModel.CustomerDiscount" />
+          
+          <AssociationSet Name="CustomerCustomerDiscount" Association="EFRecipesModel.CustomerCustomerDiscount">
+            <End Role="Customer" EntitySet="PreferredCustomers" />
+            <End Role="CustomerDiscount" EntitySet="CustomerDiscounts" />
+          </AssociationSet>
+          
+          <AssociationSet Name="CustomerCreditReport" Association="EFRecipesModel.CustomerCreditReport">
+            <End Role="Customer" EntitySet="RiskyCustomers" />
+            <End Role="CreditReport" EntitySet="CreditReports" />
+          </AssociationSet>
+          
+          <AssociationSet Name="RiskyCustomerRiskyOrder" Association="EFRecipesModel.RiskyCustomerRiskyOrder">
+            <End Role="Order" EntitySet="RiskyOrders" />
+            <End Role="Customer" EntitySet="RiskyCustomers" />
+          </AssociationSet>
+          
+          <AssociationSet Name="PerferredCustomerPerferredOrder" Association="EFRecipesModel.PerferredCustomerPerferredOrder">
+            <End Role="Order" EntitySet="PreferredOrders" />
+            <End Role="Customer" EntitySet="PreferredCustomers" />
+          </AssociationSet>
+        </EntityContainer>
+        
+        <EntityType Name="CreditReport">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreditRating" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="EFRecipesModel.CustomerCreditReport" FromRole="CreditReport" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="CustomerDiscount">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDiscount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="EFRecipesModel.CustomerCustomerDiscount" FromRole="CustomerDiscount" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer" >
+          <Key>
+            <PropertyRef Name="CustomerId" /></Key>
+          <Property Type="Int32" Name="CustomerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerDiscount" Relationship="EFRecipesModel.CustomerCustomerDiscount" FromRole="Customer" ToRole="CustomerDiscount" />
+          <NavigationProperty Name="CreditReports" Relationship="EFRecipesModel.CustomerCreditReport" FromRole="Customer" ToRole="CreditReport" />
+          <NavigationProperty Name="RiskyOrders" Relationship="EFRecipesModel.RiskyCustomerRiskyOrder" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="PreferredOrders" Relationship="EFRecipesModel.PerferredCustomerPerferredOrder" FromRole="Customer" ToRole="Order" /></EntityType>
+        <EntityType Name="Order" >
+          <Key>
+            <PropertyRef Name="OrderId" /></Key>
+          <Property Type="Int32" Name="OrderId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="RiskyCustomer" Relationship="EFRecipesModel.RiskyCustomerRiskyOrder" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="PreferredCustomer" Relationship="EFRecipesModel.PerferredCustomerPerferredOrder" FromRole="Order" ToRole="Customer" /></EntityType>
+        <Association Name="CustomerCustomerDiscount">
+          <End Type="EFRecipesModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="EFRecipesModel.CustomerDiscount" Role="CustomerDiscount" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" /></Principal>
+            <Dependent Role="CustomerDiscount">
+              <PropertyRef Name="CustomerId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="CustomerCreditReport">
+          <End Type="EFRecipesModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="EFRecipesModel.CreditReport" Role="CreditReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" /></Principal>
+            <Dependent Role="CreditReport">
+              <PropertyRef Name="CustomerId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="RiskyCustomerRiskyOrder">
+          <End Type="EFRecipesModel.Order" Role="Order" Multiplicity="*" />
+          <End Type="EFRecipesModel.Customer" Role="Customer" Multiplicity="1" /></Association>
+        <Association Name="PerferredCustomerPerferredOrder">
+          <End Type="EFRecipesModel.Order" Role="Order" Multiplicity="*" />
+          <End Type="EFRecipesModel.Customer" Role="Customer" Multiplicity="1" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="PreferredCustomers">
+            <EntityTypeMapping TypeName="EFRecipesModel.Customer">
+              <MappingFragment StoreEntitySet="PreferredCustomer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId"/>
+                <ScalarProperty Name="Name" ColumnName="Name"/>
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          
+          <EntitySetMapping Name="RiskyCustomers">
+            <EntityTypeMapping TypeName="EFRecipesModel.Customer">
+              <MappingFragment StoreEntitySet="CreditRiskCustomer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId"/>
+                <ScalarProperty Name="Name" ColumnName="Name"/>
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          
+          <EntitySetMapping Name="RiskyOrders">
+            <EntityTypeMapping TypeName="EFRecipesModel.Order">
+              <MappingFragment StoreEntitySet="CreditRiskOrder">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          
+          <EntitySetMapping Name="PreferredOrders">
+            <EntityTypeMapping TypeName="EFRecipesModel.Order">
+              <MappingFragment StoreEntitySet="PreferredOrder">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          
+          <EntitySetMapping Name="CreditReports">
+            <EntityTypeMapping TypeName="EFRecipesModel.CreditReport">
+              <MappingFragment StoreEntitySet="CreditReport">
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="CreditRating" ColumnName="CreditRating" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerDiscounts">
+            <EntityTypeMapping TypeName="EFRecipesModel.CustomerDiscount">
+              <MappingFragment StoreEntitySet="CustomerDiscount">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="PurchaseDiscount" ColumnName="PurchaseDiscount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          
+          <AssociationSetMapping Name="RiskyCustomerRiskyOrder" TypeName="EFRecipesModel.RiskyCustomerRiskyOrder" StoreEntitySet="CreditRiskOrder">
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" /></EndProperty>
+            <EndProperty Name="Order">
+              <ScalarProperty Name="OrderId" ColumnName="OrderId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="PerferredCustomerPerferredOrder" TypeName="EFRecipesModel.PerferredCustomerPerferredOrder" StoreEntitySet="PreferredOrder">
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" /></EndProperty>
+            <EndProperty Name="Order">
+              <ScalarProperty Name="OrderId" ColumnName="OrderId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe11">
+        <EntityTypeShape EntityType="EFRecipesModel.CreditReport" Width="1.5" PointX="5.875" PointY="2.625" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.CustomerDiscount" Width="1.875" PointX="1" PointY="2.75" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Customer" Width="1.5" PointX="3.625" PointY="2.625" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="EFRecipesModel.Order" Width="1.5" PointX="3.625" PointY="5.5" Height="1.7879850260416657" />
+        <AssociationConnector Association="EFRecipesModel.CustomerCustomerDiscount">
+          <ConnectorPoint PointX="3.625" PointY="3.547841796875" />
+          <ConnectorPoint PointX="2.875" PointY="3.547841796875" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.CustomerCreditReport">
+          <ConnectorPoint PointX="5.125" PointY="3.5189925130208337" />
+          <ConnectorPoint PointX="5.875" PointY="3.5189925130208337" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.RiskyCustomerRiskyOrder">
+          <ConnectorPoint PointX="4.114583333333333" PointY="5.5" />
+          <ConnectorPoint PointX="4.114583333333333" PointY="4.797587890625" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.PerferredCustomerPerferredOrder">
+          <ConnectorPoint PointX="4.625" PointY="5.5" />
+          <ConnectorPoint PointX="4.625" PointY="4.797587890625" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

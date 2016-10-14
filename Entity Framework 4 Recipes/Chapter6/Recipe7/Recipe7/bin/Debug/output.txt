@@ -1,0 +1,7 @@
+Principals
+==========
+	Robbie Smith, Salary: $48,000.00, Bonus: $3,500.00
+Instructors
+===========
+	Joan Carlson, Salary: $39,000.00
+Press <etner> to continue...

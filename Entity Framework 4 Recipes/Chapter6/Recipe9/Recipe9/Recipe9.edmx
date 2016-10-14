@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Lookup" EntityType="EFRecipesModel.Store.Lookup" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Order" EntityType="EFRecipesModel.Store.Order" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_Order_Lookup" Association="EFRecipesModel.Store.FK_Order_Lookup">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Lookup1" Association="EFRecipesModel.Store.FK_Order_Lookup1">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Lookup2" Association="EFRecipesModel.Store.FK_Order_Lookup2">
+            <End Role="Lookup" EntitySet="Lookup" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="LookupId" />
+          </Key>
+          <Property Name="LookupId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Value" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="OrderStatusId" Type="int" Nullable="false" />
+          <Property Name="TransactionTypeId" Type="int" Nullable="false" />
+          <Property Name="ShippingTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Order_Lookup">
+          <End Role="Lookup" Type="EFRecipesModel.Store.Lookup" Multiplicity="1" />
+          <End Role="Order" Type="EFRecipesModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="LookupId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Lookup1">
+          <End Role="Lookup" Type="EFRecipesModel.Store.Lookup" Multiplicity="1" />
+          <End Role="Order" Type="EFRecipesModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="LookupId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TransactionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Lookup2">
+          <End Role="Lookup" Type="EFRecipesModel.Store.Lookup" Multiplicity="1" />
+          <End Role="Order" Type="EFRecipesModel.Store.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup">
+              <PropertyRef Name="LookupId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShippingTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Lookups" EntityType="EFRecipesModel.Lookup" />
+          <EntitySet Name="Orders" EntityType="EFRecipesModel.Order" />
+          <AssociationSet Name="OrderStatusOrder" Association="EFRecipesModel.OrderStatusOrder">
+            <End Role="OrderStatus" EntitySet="Lookups" />
+            <End Role="Order" EntitySet="Orders" /></AssociationSet>
+          <AssociationSet Name="ShippingTypeOrder" Association="EFRecipesModel.ShippingTypeOrder">
+            <End Role="ShippingType" EntitySet="Lookups" />
+            <End Role="Order" EntitySet="Orders" /></AssociationSet>
+          <AssociationSet Name="TransactionTypeOrder" Association="EFRecipesModel.TransactionTypeOrder">
+            <End Role="TransactionType" EntitySet="Lookups" />
+            <End Role="Order" EntitySet="Orders" /></AssociationSet></EntityContainer>
+        <EntityType Name="Lookup" Abstract="true">
+          <Key>
+            <PropertyRef Name="LookupId" />
+          </Key>
+          <Property Name="LookupId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OrderStatusId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ShippingTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderStatus" Relationship="EFRecipesModel.OrderStatusOrder" FromRole="Order" ToRole="OrderStatus" />
+          <NavigationProperty Name="ShippingType" Relationship="EFRecipesModel.ShippingTypeOrder" FromRole="Order" ToRole="ShippingType" />
+          <NavigationProperty Name="TransactionType" Relationship="EFRecipesModel.TransactionTypeOrder" FromRole="Order" ToRole="TransactionType" />
+        </EntityType>
+        <EntityType Name="OrderStatus" BaseType="EFRecipesModel.Lookup" >
+          <NavigationProperty Name="Order" Relationship="EFRecipesModel.OrderStatusOrder" FromRole="OrderStatus" ToRole="Order" /></EntityType>
+        <EntityType Name="ShippingType" BaseType="EFRecipesModel.Lookup" >
+          <NavigationProperty Name="Order" Relationship="EFRecipesModel.ShippingTypeOrder" FromRole="ShippingType" ToRole="Order" /></EntityType>
+        <EntityType Name="TransactionType" BaseType="EFRecipesModel.Lookup" >
+          <NavigationProperty Name="Order" Relationship="EFRecipesModel.TransactionTypeOrder" FromRole="TransactionType" ToRole="Order" /></EntityType>
+        <Association Name="OrderStatusOrder">
+          <End Type="EFRecipesModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
+          <End Type="EFRecipesModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="LookupId" /></Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatusId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="ShippingTypeOrder">
+          <End Type="EFRecipesModel.ShippingType" Role="ShippingType" Multiplicity="1" />
+          <End Type="EFRecipesModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingType">
+              <PropertyRef Name="LookupId" /></Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShippingTypeId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="TransactionTypeOrder">
+          <End Type="EFRecipesModel.TransactionType" Role="TransactionType" Multiplicity="1" />
+          <End Type="EFRecipesModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="LookupId" /></Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="TransactionTypeId" /></Dependent></ReferentialConstraint></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Lookups">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Lookup)">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.OrderStatus)">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+                <Condition ColumnName="Name" Value="OrderStatus" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.ShippingType)">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+                <Condition ColumnName="Name" Value="ShippingType" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.TransactionType)">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+                <Condition ColumnName="Name" Value="TransactionType" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Orders"><EntityTypeMapping TypeName="EFRecipesModel.Order"><MappingFragment StoreEntitySet="Order">
+            <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+            <ScalarProperty Name="Amount" ColumnName="Amount" />
+            <ScalarProperty Name="OrderStatusId" ColumnName="OrderStatusId" />
+            <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+            <ScalarProperty Name="ShippingTypeId" ColumnName="ShippingTypeId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe9">
+        <EntityTypeShape EntityType="EFRecipesModel.Lookup" Width="1.5" PointX="4.375" PointY="1.125" Height="1.4033821614583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Order" Width="1.5" PointX="4.375" PointY="5.625" Height="2.5571907552083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.OrderStatus" Width="1.5" PointX="2.625" PointY="3.625" Height="1.018779296875" />
+        <InheritanceConnector EntityType="EFRecipesModel.OrderStatus">
+          <ConnectorPoint PointX="5.125" PointY="2.5283821614583331" />
+          <ConnectorPoint PointX="5.125" PointY="3.25" />
+          <ConnectorPoint PointX="3.375" PointY="3.25" />
+          <ConnectorPoint PointX="3.375" PointY="3.625" /></InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.ShippingType" Width="1.5" PointX="4.375" PointY="3.625" Height="1.018779296875" />
+        <InheritanceConnector EntityType="EFRecipesModel.ShippingType">
+          <ConnectorPoint PointX="5.125" PointY="2.5283821614583331" />
+          <ConnectorPoint PointX="5.125" PointY="3.625" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.TransactionType" Width="1.5" PointX="6.125" PointY="3.625" Height="1.018779296875" />
+        <InheritanceConnector EntityType="EFRecipesModel.TransactionType">
+          <ConnectorPoint PointX="5.125" PointY="2.5283821614583331" />
+          <ConnectorPoint PointX="5.125" PointY="3.25" />
+          <ConnectorPoint PointX="6.875" PointY="3.25" />
+          <ConnectorPoint PointX="6.875" PointY="3.625" /></InheritanceConnector>
+        <AssociationConnector Association="EFRecipesModel.OrderStatusOrder">
+          <ConnectorPoint PointX="3.375" PointY="4.8360807291666665" />
+          <ConnectorPoint PointX="3.375" PointY="6.9035953776041659" />
+          <ConnectorPoint PointX="4.375" PointY="6.9035953776041659" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.ShippingTypeOrder">
+          <ConnectorPoint PointX="5.125" PointY="4.8360807291666665" />
+          <ConnectorPoint PointX="5.125" PointY="5.625" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.TransactionTypeOrder">
+          <ConnectorPoint PointX="6.875" PointY="4.8360807291666665" />
+          <ConnectorPoint PointX="6.875" PointY="6.9035953776041659" />
+          <ConnectorPoint PointX="5.875" PointY="6.9035953776041659" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

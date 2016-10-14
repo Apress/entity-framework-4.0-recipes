@@ -1,0 +1,8 @@
+Using nested from clauses...
+EventId 31, OrganizerId 87
+EventId 32, OrganizerId 88
+
+Using SelectManay()
+EventId 31, OrganizerId 87
+EventId 32, OrganizerId 88
+Press <enter> to continue...

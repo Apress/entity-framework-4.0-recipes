@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="EFRecipesModel.Store.Employee" store:Type="Tables" Schema="Chapter6" />
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Rate" Type="decimal" Scale="2" />
+          <Property Name="Hours" Type="int" />
+          <Property Name="Salary" Type="decimal" Scale="2" />
+          <Property Name="Commission" Type="decimal" Scale="2" />
+          <Property Name="EmployeeType" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Employees" EntityType="EFRecipesModel.Employee" />
+        </EntityContainer>
+        <EntityType Name="Employee" Abstract="true">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="HourlyEmployee" BaseType="EFRecipesModel.Employee" >
+          <Property Type="Decimal" Name="Rate" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Hours" Nullable="true" /></EntityType>
+        <EntityType Name="SalariedEmployee" BaseType="EFRecipesModel.Employee" >
+          <Property Type="Decimal" Name="Salary" Nullable="true" Precision="18" Scale="2" /></EntityType>
+        <EntityType Name="CommissionedEmployee" BaseType="EFRecipesModel.SalariedEmployee" >
+          <Property Type="Decimal" Name="Commission" Nullable="false" Precision="18" Scale="2" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Employee)">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.HourlyEmployee)">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <Condition ColumnName="EmployeeType" Value="hourly" />
+                </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EFRecipesModel.SalariedEmployee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <Condition ColumnName="EmployeeType" Value="salaried" />
+                <Condition ColumnName="Commission" IsNull="true" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.CommissionedEmployee)">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <Condition ColumnName="Commission" IsNull="false" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe8">
+        <EntityTypeShape EntityType="EFRecipesModel.Employee" Width="1.5" PointX="3.25" PointY="2.25" Height="1.4033821614583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.HourlyEmployee" Width="1.5" PointX="4.25" PointY="4.375" Height="1.4033821614583326" />
+        <InheritanceConnector EntityType="EFRecipesModel.HourlyEmployee">
+          <ConnectorPoint PointX="4.520833333333333" PointY="3.6533821614583331" />
+          <ConnectorPoint PointX="4.520833333333333" PointY="4.375" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.SalariedEmployee" Width="1.75" PointX="2.25" PointY="4.375" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.SalariedEmployee">
+          <ConnectorPoint PointX="3.614583333333333" PointY="3.6533821614583331" />
+          <ConnectorPoint PointX="3.614583333333333" PointY="4.375" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.CommissionedEmployee" Width="2.125" PointX="2.125" PointY="6.25" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.CommissionedEmployee">
+          <ConnectorPoint PointX="3.1875" PointY="5.5860807291666665" />
+          <ConnectorPoint PointX="3.1875" PointY="6.25" />
+          </InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

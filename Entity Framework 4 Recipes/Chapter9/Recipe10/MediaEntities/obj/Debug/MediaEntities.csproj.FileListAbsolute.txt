@@ -1,0 +1,5 @@
+M:\Book Work\Code\Chapter9\Recipe10\MediaEntities\bin\Debug\MediaEntities.dll
+M:\Book Work\Code\Chapter9\Recipe10\MediaEntities\bin\Debug\MediaEntities.pdb
+M:\Book Work\Code\Chapter9\Recipe10\MediaEntities\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter9\Recipe10\MediaEntities\obj\Debug\MediaEntities.dll
+M:\Book Work\Code\Chapter9\Recipe10\MediaEntities\obj\Debug\MediaEntities.pdb

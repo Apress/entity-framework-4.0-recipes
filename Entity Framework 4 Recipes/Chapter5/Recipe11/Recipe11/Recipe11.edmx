@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Associate" EntityType="EFRecipesModel.Store.Associate" store:Type="Tables" Schema="Chapter5" />
+          <EntitySet Name="CEO" EntityType="EFRecipesModel.Store.CEO" store:Type="Tables" Schema="Chapter5" />
+          <EntitySet Name="ProjectManager" EntityType="EFRecipesModel.Store.ProjectManager" store:Type="Tables" Schema="Chapter5" />
+          <EntitySet Name="Supervisor" EntityType="EFRecipesModel.Store.Supervisor" store:Type="Tables" Schema="Chapter5" />
+          <AssociationSet Name="FK_Associate_Associate" Association="EFRecipesModel.Store.FK_Associate_Associate">
+            <End Role="Associate" EntitySet="Associate" />
+            <End Role="Associate1" EntitySet="Associate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CEO_Associate" Association="EFRecipesModel.Store.FK_CEO_Associate">
+            <End Role="Associate" EntitySet="Associate" />
+            <End Role="CEO" EntitySet="CEO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectManager_Associate" Association="EFRecipesModel.Store.FK_ProjectManager_Associate">
+            <End Role="Associate" EntitySet="Associate" />
+            <End Role="ProjectManager" EntitySet="ProjectManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supervisor_Associate" Association="EFRecipesModel.Store.FK_Supervisor_Associate">
+            <End Role="Associate" EntitySet="Associate" />
+            <End Role="Supervisor" EntitySet="Supervisor" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Associate">
+          <Key>
+            <PropertyRef Name="AssociateId" />
+          </Key>
+          <Property Name="AssociateId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ReportsTo" Type="int" />
+        </EntityType>
+        <EntityType Name="CEO">
+          <Key>
+            <PropertyRef Name="AssociateId" />
+          </Key>
+          <Property Name="AssociateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectManager">
+          <Key>
+            <PropertyRef Name="AssociateId" />
+          </Key>
+          <Property Name="AssociateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supervisor">
+          <Key>
+            <PropertyRef Name="AssociateId" />
+          </Key>
+          <Property Name="AssociateId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Associate_Associate">
+          <End Role="Associate" Type="EFRecipesModel.Store.Associate" Multiplicity="0..1" />
+          <End Role="Associate1" Type="EFRecipesModel.Store.Associate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Associate">
+              <PropertyRef Name="AssociateId" />
+            </Principal>
+            <Dependent Role="Associate1">
+              <PropertyRef Name="ReportsTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CEO_Associate">
+          <End Role="Associate" Type="EFRecipesModel.Store.Associate" Multiplicity="1" />
+          <End Role="CEO" Type="EFRecipesModel.Store.CEO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Associate">
+              <PropertyRef Name="AssociateId" />
+            </Principal>
+            <Dependent Role="CEO">
+              <PropertyRef Name="AssociateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectManager_Associate">
+          <End Role="Associate" Type="EFRecipesModel.Store.Associate" Multiplicity="1" />
+          <End Role="ProjectManager" Type="EFRecipesModel.Store.ProjectManager" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Associate">
+              <PropertyRef Name="AssociateId" />
+            </Principal>
+            <Dependent Role="ProjectManager">
+              <PropertyRef Name="AssociateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supervisor_Associate">
+          <End Role="Associate" Type="EFRecipesModel.Store.Associate" Multiplicity="1" />
+          <End Role="Supervisor" Type="EFRecipesModel.Store.Supervisor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Associate">
+              <PropertyRef Name="AssociateId" />
+            </Principal>
+            <Dependent Role="Supervisor">
+              <PropertyRef Name="AssociateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Associates" EntityType="EFRecipesModel.Associate" />
+          <AssociationSet Name="FK_Associate_Associate" Association="EFRecipesModel.FK_Associate_Associate">
+            <End Role="Associate" EntitySet="Associates" />
+            <End Role="Associate1" EntitySet="Associates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Associate">
+          <Key>
+            <PropertyRef Name="AssociateId" />
+          </Key>
+          <Property Name="AssociateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ReportsTo" Type="Int32" />
+          <NavigationProperty Name="TeamMembers" Relationship="EFRecipesModel.FK_Associate_Associate" FromRole="Associate" ToRole="Associate1" />
+          <NavigationProperty Name="Manager" Relationship="EFRecipesModel.FK_Associate_Associate" FromRole="Associate1" ToRole="Associate" />
+        </EntityType>
+        <EntityType Name="CEO" BaseType="EFRecipesModel.Associate">
+        </EntityType>
+        <EntityType Name="ProjectManager" BaseType="EFRecipesModel.Associate">
+        </EntityType>
+        <EntityType Name="Supervisor" BaseType="EFRecipesModel.Associate">
+        </EntityType>
+        <Association Name="FK_Associate_Associate">
+          <End Role="Associate" Type="EFRecipesModel.Associate" Multiplicity="0..1" />
+          <End Role="Associate1" Type="EFRecipesModel.Associate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Associate">
+              <PropertyRef Name="AssociateId" />
+            </Principal>
+            <Dependent Role="Associate1">
+              <PropertyRef Name="ReportsTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Associates">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Associate)">
+              <MappingFragment StoreEntitySet="Associate">
+                <ScalarProperty Name="AssociateId" ColumnName="AssociateId" />
+                <ScalarProperty Name="ReportsTo" ColumnName="ReportsTo" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.CEO)">
+              <MappingFragment StoreEntitySet="CEO">
+                <ScalarProperty Name="AssociateId" ColumnName="AssociateId" />
+                </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.ProjectManager)">
+              <MappingFragment StoreEntitySet="ProjectManager">
+                <ScalarProperty Name="AssociateId" ColumnName="AssociateId" />
+                </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Supervisor)">
+              <MappingFragment StoreEntitySet="Supervisor">
+                <ScalarProperty Name="AssociateId" ColumnName="AssociateId" />
+                </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe11">
+        <EntityTypeShape EntityType="EFRecipesModel.Associate" Width="1.5" PointX="4.625" PointY="0.5" Height="2.5571907552083331" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.CEO" Width="1.5" PointX="6.375" PointY="3" Height="1.0187792968749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.ProjectManager" Width="1.5" PointX="4.625" PointY="3" Height="1.0187792968749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Supervisor" Width="1.5" PointX="2.875" PointY="3" Height="1.0187792968749996" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Associate_Associate" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.625" PointY="1.4901432291666668" />
+          <ConnectorPoint PointX="4.375" PointY="1.4901432291666668" />
+          <ConnectorPoint PointX="4.375" PointY="2.0729166666666665" />
+          <ConnectorPoint PointX="4.625" PointY="2.0729166666666665" />
+          </AssociationConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.CEO" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.125" PointY="1.0104166666666665" />
+          <ConnectorPoint PointX="7.052083333333333" PointY="1.0104166666666665" />
+          <ConnectorPoint PointX="7.052083333333333" PointY="3" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.ProjectManager" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.375" PointY="2.4802864583333335" />
+          <ConnectorPoint PointX="5.375" PointY="3" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.Supervisor" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.625" PointY="1.03125" />
+          <ConnectorPoint PointX="3.625" PointY="1.03125" />
+          <ConnectorPoint PointX="3.625" PointY="3" />
+          </InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

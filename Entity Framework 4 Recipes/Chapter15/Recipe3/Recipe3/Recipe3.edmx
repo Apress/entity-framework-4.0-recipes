@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="EFRecipesModel.Store.Employee" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="Project" EntityType="EFRecipesModel.Store.Project" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="ProjectEmployee" EntityType="EFRecipesModel.Store.ProjectEmployee" store:Type="Tables" Schema="Chapter15" />
+          <AssociationSet Name="FK_ProjectEmployee_Employee" Association="EFRecipesModel.Store.FK_ProjectEmployee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ProjectEmployee" EntitySet="ProjectEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectEmployee_Project" Association="EFRecipesModel.Store.FK_ProjectEmployee_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectEmployee" EntitySet="ProjectEmployee" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProjectEmployee">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_ProjectEmployee_Employee">
+          <End Role="Employee" Type="EFRecipesModel.Store.Employee" Multiplicity="1" />
+          <End Role="ProjectEmployee" Type="EFRecipesModel.Store.ProjectEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="ProjectEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectEmployee_Project">
+          <End Role="Project" Type="EFRecipesModel.Store.Project" Multiplicity="1" />
+          <End Role="ProjectEmployee" Type="EFRecipesModel.Store.ProjectEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="ProjectEmployee">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProjectManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertProjectManager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter15">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Employees" EntityType="EFRecipesModel.Employee" />
+          <EntitySet Name="Projects" EntityType="EFRecipesModel.Project" />
+          <AssociationSet Name="Members" Association="EFRecipesModel.Members">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Project" EntitySet="Projects" /></AssociationSet>
+          <AssociationSet Name="ProjectManager" Association="EFRecipesModel.ProjectManager">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Project" EntitySet="Projects" /></AssociationSet></EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="MemberProjects" Relationship="EFRecipesModel.Members" FromRole="Employee" ToRole="Project" />
+          <NavigationProperty Name="ManagerProjects" Relationship="EFRecipesModel.ProjectManager" FromRole="Employee" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Members" Relationship="EFRecipesModel.Members" FromRole="Project" ToRole="Employee" />
+          <NavigationProperty Name="ProjectManager" Relationship="EFRecipesModel.ProjectManager" FromRole="Project" ToRole="Employee" />
+        </EntityType>
+        <Association Name="Members">
+          <End Type="EFRecipesModel.Employee" Role="Employee" Multiplicity="*" />
+          <End Type="EFRecipesModel.Project" Role="Project" Multiplicity="*" /></Association>
+        <Association Name="ProjectManager">
+          <End Type="EFRecipesModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="EFRecipesModel.Project" Role="Project" Multiplicity="*" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <AssociationSetMapping TypeName="EFRecipesModel.Members" Name="Members">
+            <QueryView>
+              select value EFRecipesModel.Members(
+              createref(EFRecipesEntities.Employees,row(pe.EmployeeId)),
+              createref(EFRecipesEntities.Projects,row(pe.ProjectId))
+              )
+              from EFRecipesModelStoreContainer.ProjectEmployee as pe
+              where pe.Role = 'MM'
+            </QueryView>
+            <ModificationFunctionMapping>
+              <InsertFunction FunctionName="EFRecipesModel.Store.InsertMember">
+                <EndProperty Name="Project">
+                  <ScalarProperty Name="ProjectId" ParameterName="ProjectId" />
+                </EndProperty>
+                <EndProperty Name="Employee">
+                  <ScalarProperty Name="EmployeeId" ParameterName="EmployeeId" />
+                </EndProperty>
+              </InsertFunction>
+              <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteMember">
+                <EndProperty Name="Project">
+                  <ScalarProperty Name="ProjectId" ParameterName="ProjectId" />
+                </EndProperty>
+                <EndProperty Name="Employee">
+                  <ScalarProperty Name="EmployeeId" ParameterName="EmployeeId" />
+                </EndProperty>
+              </DeleteFunction>
+            </ModificationFunctionMapping>
+          </AssociationSetMapping>
+          <AssociationSetMapping TypeName="EFRecipesModel.ProjectManager" Name="ProjectManager">
+            <QueryView>
+              select value EFRecipesModel.ProjectManager(
+              createref(EFRecipesEntities.Employees,row(pe.EmployeeId)),
+              createref(EFRecipesEntities.Projects,row(pe.ProjectId))
+              )
+              from EFRecipesModelStoreContainer.ProjectEmployee as pe
+              where pe.Role = 'PM'
+            </QueryView>
+            <ModificationFunctionMapping>
+              <InsertFunction FunctionName="EFRecipesModel.Store.InsertProjectManager">
+                <EndProperty Name="Project">
+                  <ScalarProperty Name="ProjectId" ParameterName="ProjectId" />
+                </EndProperty>
+                <EndProperty Name="Employee">
+                  <ScalarProperty Name="EmployeeId" ParameterName="EmployeeId" />
+                </EndProperty>
+              </InsertFunction>
+              <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteMember">
+                <EndProperty Name="Project">
+                  <ScalarProperty Name="ProjectId" ParameterName="ProjectId" />
+                </EndProperty>
+                <EndProperty Name="Employee">
+                  <ScalarProperty Name="EmployeeId" ParameterName="EmployeeId" />
+                </EndProperty>
+              </DeleteFunction>
+            </ModificationFunctionMapping>
+          </AssociationSetMapping>
+
+          <EntitySetMapping Name="Employees">
+            <QueryView>
+              select value EFRecipesModel.Employee(e.EmployeeId,e.Name)
+              from EFRecipesModelStoreContainer.Employee as e
+            </QueryView>
+            <EntityTypeMapping TypeName="EFRecipesModel.Employee">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertEmployee">
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="EmployeeId" ColumnName="EmployeeId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateEmployee">
+                  <ScalarProperty Name="EmployeeId" ParameterName="EmployeeId" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteEmployee">
+                  <ScalarProperty Name="EmployeeId" ParameterName="EmployeeId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <QueryView>
+              select value EFRecipesModel.Project(p.ProjectId,p.Name)
+              from EFRecipesModelStoreContainer.Project as p
+            </QueryView>
+            <EntityTypeMapping TypeName="EFRecipesModel.Project">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertProject">
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="ProjectId" ColumnName="ProjectId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateProject">
+                  <ScalarProperty Name="ProjectId" ParameterName="ProjectId" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteProject">
+                  <ScalarProperty Name="ProjectId" ParameterName="ProjectId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe3">
+        <EntityTypeShape EntityType="EFRecipesModel.Employee" Width="1.5" PointX="0.75" PointY="1.125" Height="1.5956835937500002" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Project" Width="1.5" PointX="3.25" PointY="1.125" Height="1.4033821614583331" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.Members">
+          <ConnectorPoint PointX="2.25" PointY="1.8266910807291665" />
+          <ConnectorPoint PointX="3.25" PointY="1.8266910807291665" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.ProjectManager">
+          <ConnectorPoint PointX="2.25" PointY="1.4614208984375" />
+          <ConnectorPoint PointX="3.25" PointY="1.4614208984375" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

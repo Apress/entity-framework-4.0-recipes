@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Task" EntityType="EFRecipesModel.Store.Task" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Worker" EntityType="EFRecipesModel.Store.Worker" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="WorkerTask" EntityType="EFRecipesModel.Store.WorkerTask" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_WorkerTask_Task" Association="EFRecipesModel.Store.FK_WorkerTask_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="WorkerTask" EntitySet="WorkerTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerTask_Worker" Association="EFRecipesModel.Store.FK_WorkerTask_Worker">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="WorkerTask" EntitySet="WorkerTask" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="WorkerId" />
+          </Key>
+          <Property Name="WorkerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WorkerTask">
+          <Key>
+            <PropertyRef Name="WorkerId" />
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="WorkerId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_WorkerTask_Task">
+          <End Role="Task" Type="EFRecipesModel.Store.Task" Multiplicity="1" />
+          <End Role="WorkerTask" Type="EFRecipesModel.Store.WorkerTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="WorkerTask">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerTask_Worker">
+          <End Role="Worker" Type="EFRecipesModel.Store.Worker" Multiplicity="1" />
+          <End Role="WorkerTask" Type="EFRecipesModel.Store.WorkerTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="WorkerId" />
+            </Principal>
+            <Dependent Role="WorkerTask">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tasks" EntityType="EFRecipesModel.Task" />
+          <EntitySet Name="Workers" EntityType="EFRecipesModel.Worker" />
+          <EntitySet Name="WorkerTasks" EntityType="EFRecipesModel.WorkerTask" />
+          <AssociationSet Name="TaskWorkerTask" Association="EFRecipesModel.TaskWorkerTask">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="WorkerTask" EntitySet="WorkerTasks" /></AssociationSet>
+          <AssociationSet Name="WorkerWorkerTask" Association="EFRecipesModel.WorkerWorkerTask">
+            <End Role="Worker" EntitySet="Workers" />
+            <End Role="WorkerTask" EntitySet="WorkerTasks" /></AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="WorkerTasks" Relationship="EFRecipesModel.TaskWorkerTask" FromRole="Task" ToRole="WorkerTask" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="WorkerId" />
+          </Key>
+          <Property Name="WorkerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="WorkerTasks" Relationship="EFRecipesModel.WorkerWorkerTask" FromRole="Worker" ToRole="WorkerTask" />
+        </EntityType>
+        <EntityType Name="WorkerTask" >
+          <Key>
+            <PropertyRef Name="WorkerId" />
+            <PropertyRef Name="TaskId" /></Key>
+          <Property Type="Int32" Name="WorkerId" Nullable="false" />
+          <Property Type="Int32" Name="TaskId" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="EFRecipesModel.TaskWorkerTask" FromRole="WorkerTask" ToRole="Task" />
+          <NavigationProperty Name="Worker" Relationship="EFRecipesModel.WorkerWorkerTask" FromRole="WorkerTask" ToRole="Worker" /></EntityType>
+        <Association Name="TaskWorkerTask">
+          <End Type="EFRecipesModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="EFRecipesModel.WorkerTask" Role="WorkerTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" /></Principal>
+            <Dependent Role="WorkerTask">
+              <PropertyRef Name="TaskId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="WorkerWorkerTask">
+          <End Type="EFRecipesModel.Worker" Role="Worker" Multiplicity="1" />
+          <End Type="EFRecipesModel.WorkerTask" Role="WorkerTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="WorkerId" /></Principal>
+            <Dependent Role="WorkerTask">
+              <PropertyRef Name="WorkerId" /></Dependent></ReferentialConstraint></Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Tasks"><EntityTypeMapping TypeName="EFRecipesModel.Task"><MappingFragment StoreEntitySet="Task">
+            <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Workers"><EntityTypeMapping TypeName="EFRecipesModel.Worker"><MappingFragment StoreEntitySet="Worker">
+            <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="WorkerTasks">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.WorkerTask)">
+              <MappingFragment StoreEntitySet="WorkerTask">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="WorkerId" ColumnName="WorkerId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe2">
+        <EntityTypeShape EntityType="EFRecipesModel.Task" Width="1.5" PointX="0.75" PointY="1" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Worker" Width="1.5" PointX="5.75" PointY="1" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.WorkerTask" Width="1.5" PointX="3.25" PointY="1" Height="1.7879850260416661" />
+        <AssociationConnector Association="EFRecipesModel.TaskWorkerTask">
+          <ConnectorPoint PointX="2.25" PointY="1.797841796875" />
+          <ConnectorPoint PointX="3.25" PointY="1.797841796875" /></AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.WorkerWorkerTask">
+          <ConnectorPoint PointX="5.75" PointY="1.797841796875" />
+          <ConnectorPoint PointX="4.75" PointY="1.797841796875" /></AssociationConnector>
+        </Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

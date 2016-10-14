@@ -1,0 +1,5 @@
+M:\Book Work\Code\Chapter13\Recipe13\ComplaintEntities\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter13\Recipe13\ComplaintEntities\bin\Debug\ComplaintEntities.dll
+M:\Book Work\Code\Chapter13\Recipe13\ComplaintEntities\bin\Debug\ComplaintEntities.pdb
+M:\Book Work\Code\Chapter13\Recipe13\ComplaintEntities\obj\Debug\ComplaintEntities.dll
+M:\Book Work\Code\Chapter13\Recipe13\ComplaintEntities\obj\Debug\ComplaintEntities.pdb

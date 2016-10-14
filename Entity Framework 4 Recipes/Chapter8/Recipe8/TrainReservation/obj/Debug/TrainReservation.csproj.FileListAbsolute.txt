@@ -1,0 +1,6 @@
+M:\Book Work\Code\Chapter8\Recipe8\TrainReservation\bin\Debug\TrainReservation.dll.config
+M:\Book Work\Code\Chapter8\Recipe8\TrainReservation\bin\Debug\TrainReservation.dll
+M:\Book Work\Code\Chapter8\Recipe8\TrainReservation\bin\Debug\TrainReservation.pdb
+M:\Book Work\Code\Chapter8\Recipe8\TrainReservation\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter8\Recipe8\TrainReservation\obj\Debug\TrainReservation.dll
+M:\Book Work\Code\Chapter8\Recipe8\TrainReservation\obj\Debug\TrainReservation.pdb

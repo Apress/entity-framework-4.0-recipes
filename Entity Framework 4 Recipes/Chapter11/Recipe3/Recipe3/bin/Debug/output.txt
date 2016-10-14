@@ -1,0 +1,10 @@
+Query using eSql
+Employee: Jill Robins, Age: 33
+Employee: Michael Kirk, Age: 24
+Employee: Karen Stanford, Age: 46
+
+Query using LINQ
+Employee: Jill Robins, Age: 33
+Employee: Michael Kirk, Age: 24
+Employee: Karen Stanford, Age: 46
+Press <enter> to continue...

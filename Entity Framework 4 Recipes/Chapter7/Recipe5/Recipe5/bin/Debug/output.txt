@@ -1,0 +1,5 @@
+Technician: Julie Kerns
+	Service Call: Contact Robin Rosen about Can't get sattelite signal.
+Technician: Robert Allison
+	Service Call: Contact Phillip Marlowe about Channel not available
+Press <enter> to continue...

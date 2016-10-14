@@ -1,0 +1,7 @@
+M:\Book Work\Code\Chapter8\Recipe8\Tests\bin\Debug\Tests.dll
+M:\Book Work\Code\Chapter8\Recipe8\Tests\bin\Debug\Tests.pdb
+M:\Book Work\Code\Chapter8\Recipe8\Tests\obj\Debug\ResolveAssemblyReference.cache
+M:\Book Work\Code\Chapter8\Recipe8\Tests\obj\Debug\Tests.dll
+M:\Book Work\Code\Chapter8\Recipe8\Tests\obj\Debug\Tests.pdb
+M:\Book Work\Code\Chapter8\Recipe8\Tests\bin\Debug\TrainReservation.dll
+M:\Book Work\Code\Chapter8\Recipe8\Tests\bin\Debug\TrainReservation.pdb

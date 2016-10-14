@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Business" EntityType="EFRecipesModel.Store.Business" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="eCommerce" EntityType="EFRecipesModel.Store.eCommerce" store:Type="Tables" Schema="Chapter2" />
+          <EntitySet Name="Retail" EntityType="EFRecipesModel.Store.Retail" store:Type="Tables" Schema="Chapter2" />
+          <AssociationSet Name="FK_eCommerce_Business" Association="EFRecipesModel.Store.FK_eCommerce_Business">
+            <End Role="Business" EntitySet="Business" />
+            <End Role="eCommerce" EntitySet="eCommerce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retail_Business" Association="EFRecipesModel.Store.FK_Retail_Business">
+            <End Role="Business" EntitySet="Business" />
+            <End Role="Retail" EntitySet="Retail" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="BusinessId" />
+          </Key>
+          <Property Name="BusinessId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LicenseNumber" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="eCommerce">
+          <Key>
+            <PropertyRef Name="BusinessId" />
+          </Key>
+          <Property Name="BusinessId" Type="int" Nullable="false" />
+          <Property Name="URL" Type="varchar" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="Retail">
+          <Key>
+            <PropertyRef Name="BusinessId" />
+          </Key>
+          <Property Name="BusinessId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="ZIPCode" Type="varchar" Nullable="false" MaxLength="9" />
+        </EntityType>
+        <Association Name="FK_eCommerce_Business">
+          <End Role="Business" Type="EFRecipesModel.Store.Business" Multiplicity="1" />
+          <End Role="eCommerce" Type="EFRecipesModel.Store.eCommerce" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Business">
+              <PropertyRef Name="BusinessId" />
+            </Principal>
+            <Dependent Role="eCommerce">
+              <PropertyRef Name="BusinessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retail_Business">
+          <End Role="Business" Type="EFRecipesModel.Store.Business" Multiplicity="1" />
+          <End Role="Retail" Type="EFRecipesModel.Store.Retail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Business">
+              <PropertyRef Name="BusinessId" />
+            </Principal>
+            <Dependent Role="Retail">
+              <PropertyRef Name="BusinessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Businesses" EntityType="EFRecipesModel.Business" />
+        </EntityContainer>
+        <EntityType Name="Business">
+          <Key>
+            <PropertyRef Name="BusinessId" />
+          </Key>
+          <Property Name="BusinessId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LicenseNumber" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="eCommerce" BaseType="EFRecipesModel.Business">
+          <Property Name="URL" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Retail" BaseType="EFRecipesModel.Business">
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="ZIPCode" Type="String" Nullable="false" MaxLength="9" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Businesses">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Business)">
+              <MappingFragment StoreEntitySet="Business">
+                <ScalarProperty Name="BusinessId" ColumnName="BusinessId" />
+                <ScalarProperty Name="LicenseNumber" ColumnName="LicenseNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Retail)">
+              <MappingFragment StoreEntitySet="Retail">
+                <ScalarProperty Name="BusinessId" ColumnName="BusinessId" />
+                <ScalarProperty Name="ZIPCode" ColumnName="ZIPCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.eCommerce)">
+              <MappingFragment StoreEntitySet="eCommerce">
+                <ScalarProperty Name="BusinessId" ColumnName="BusinessId" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe8">
+        <EntityTypeShape EntityType="EFRecipesModel.Business" Width="1.5" PointX="2.75" PointY="1.25" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.eCommerce" Width="1.5" PointX="1.625" PointY="3.5" Height="1.2110807291666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Retail" Width="1.5" PointX="3.875" PointY="3.5" Height="1.7879850260416665" IsExpanded="true" />
+        <InheritanceConnector EntityType="EFRecipesModel.Retail">
+          <ConnectorPoint PointX="3.8854166666666665" PointY="2.84568359375" />
+          <ConnectorPoint PointX="3.8854166666666665" PointY="3.125" />
+          <ConnectorPoint PointX="4.625" PointY="3.125" />
+          <ConnectorPoint PointX="4.625" PointY="3.5" /></InheritanceConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.eCommerce">
+          <ConnectorPoint PointX="3.177083333333333" PointY="2.84568359375" />
+          <ConnectorPoint PointX="3.177083333333333" PointY="3.125" />
+          <ConnectorPoint PointX="2.375" PointY="3.125" />
+          <ConnectorPoint PointX="2.375" PointY="3.5" />
+          </InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

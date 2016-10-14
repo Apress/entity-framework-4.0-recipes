@@ -1,0 +1,4 @@
+Course: Mathematical Logic 101
+	Student: Robin Rosen-Parker has paid
+Course: Organic Chemistry 211
+Press <enter> to continue...

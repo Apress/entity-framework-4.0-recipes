@@ -1,0 +1,6 @@
+Venue: City Center Hall
+	Event: All Star Boxing
+	--- Competitors ---
+	Big Joe Green
+	Terminator Tim
+Press <enter> to continue...

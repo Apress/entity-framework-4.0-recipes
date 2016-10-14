@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Event" EntityType="EFRecipesModel.Store.Event" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="EventOrganizer" EntityType="EFRecipesModel.Store.EventOrganizer" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Organizer" EntityType="EFRecipesModel.Store.Organizer" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_EventOrganizer_Event" Association="EFRecipesModel.Store.FK_EventOrganizer_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="EventOrganizer" EntitySet="EventOrganizer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventOrganizer_Organizer" Association="EFRecipesModel.Store.FK_EventOrganizer_Organizer">
+            <End Role="Organizer" EntitySet="Organizer" />
+            <End Role="EventOrganizer" EntitySet="EventOrganizer" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EventOrganizer">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="OrganizerId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="OrganizerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organizer">
+          <Key>
+            <PropertyRef Name="OrganizerId" />
+          </Key>
+          <Property Name="OrganizerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_EventOrganizer_Event">
+          <End Role="Event" Type="EFRecipesModel.Store.Event" Multiplicity="1" />
+          <End Role="EventOrganizer" Type="EFRecipesModel.Store.EventOrganizer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventOrganizer">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventOrganizer_Organizer">
+          <End Role="Organizer" Type="EFRecipesModel.Store.Organizer" Multiplicity="1" />
+          <End Role="EventOrganizer" Type="EFRecipesModel.Store.EventOrganizer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizer">
+              <PropertyRef Name="OrganizerId" />
+            </Principal>
+            <Dependent Role="EventOrganizer">
+              <PropertyRef Name="OrganizerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Events" EntityType="EFRecipesModel.Event" />
+          <EntitySet Name="Organizers" EntityType="EFRecipesModel.Organizer" />
+          <AssociationSet Name="EventOrganizer" Association="EFRecipesModel.EventOrganizer">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Organizer" EntitySet="Organizers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Organizers" Relationship="EFRecipesModel.EventOrganizer" FromRole="Event" ToRole="Organizer" />
+        </EntityType>
+        <EntityType Name="Organizer">
+          <Key>
+            <PropertyRef Name="OrganizerId" />
+          </Key>
+          <Property Name="OrganizerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="EFRecipesModel.EventOrganizer" FromRole="Organizer" ToRole="Event" />
+        </EntityType>
+        <Association Name="EventOrganizer">
+          <End Role="Event" Type="EFRecipesModel.Event" Multiplicity="*" />
+          <End Role="Organizer" Type="EFRecipesModel.Organizer" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Events"><EntityTypeMapping TypeName="EFRecipesModel.Event"><MappingFragment StoreEntitySet="Event">
+            <ScalarProperty Name="EventId" ColumnName="EventId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Organizers"><EntityTypeMapping TypeName="EFRecipesModel.Organizer"><MappingFragment StoreEntitySet="Organizer">
+            <ScalarProperty Name="OrganizerId" ColumnName="OrganizerId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="EventOrganizer" TypeName="EFRecipesModel.EventOrganizer" StoreEntitySet="EventOrganizer">
+            <EndProperty Name="Event">
+              <ScalarProperty Name="EventId" ColumnName="EventId" />
+            </EndProperty>
+            <EndProperty Name="Organizer">
+              <ScalarProperty Name="OrganizerId" ColumnName="OrganizerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe1">
+        <EntityTypeShape EntityType="EFRecipesModel.Event" Width="1.5" PointX="0.75" PointY="0.875" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Organizer" Width="1.5" PointX="3" PointY="0.875" Height="1.59568359375" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.EventOrganizer" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.672841796875" />
+          <ConnectorPoint PointX="3" PointY="1.672841796875" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

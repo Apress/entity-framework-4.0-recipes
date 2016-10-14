@@ -1,0 +1,17 @@
+Workers with serious accidents...
+John Kearney had the following accidents
+	Cuts and contusions, severity: 3
+	Broken foot, severity: 4
+Nancy Roberts had the following accidents
+	Minor burn, severity: 3
+Karla Gibbons had the following accidents
+	--None--
+
+John Kearney had the following accidents
+	Cuts and contusions, severity: 3
+	Broken foot, severity: 4
+Nancy Roberts had the following accidents
+	Minor burn, severity: 3
+Karla Gibbons had the following accidents
+	--None--
+Press <enter> to continue...

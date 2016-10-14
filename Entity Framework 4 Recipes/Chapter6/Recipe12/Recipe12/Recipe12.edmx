@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Member" EntityType="EFRecipesModel.Store.Member" store:Type="Tables" Schema="Chapter6" />
+        </EntityContainer>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Age" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="DeleteMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="MemberId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Age" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Age" Type="int" Mode="In" />
+          <Parameter Name="MemberId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Members" EntityType="EFRecipesModel.Member" />
+        </EntityContainer>
+        <EntityType Name="Member" Abstract="true">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teen" BaseType="EFRecipesModel.Member" />
+        <EntityType Name="Adult" BaseType="EFRecipesModel.Member" />
+        <EntityType Name="Senior" BaseType="EFRecipesModel.Member" /></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Members">
+            <QueryView>
+              select value
+              case
+              when m.Age &lt; 20 then
+              EFRecipesModel.Teen(m.MemberId,m.Name,m.Phone,m.Age)
+              when m.Age between 20 and 55 then
+              EFRecipesModel.Adult(m.MemberId,m.Name,m.Phone,m.Age)
+              when m.Age > 55 then
+              EFRecipesModel.Senior(m.MemberId,m.Name,m.Phone,m.Age)
+              end
+              from EFRecipesModelStoreContainer.Member as m
+            </QueryView>
+            <EntityTypeMapping TypeName="EFRecipesModel.Teen">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertMember" >
+                  <ScalarProperty Name="Age" ParameterName="Age" />
+                  <ScalarProperty Name="Phone" ParameterName="Phone" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="MemberId" ColumnName="MemberId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateMember" >
+                  <ScalarProperty Name="MemberId" ParameterName="MemberId" Version="Current" />
+                  <ScalarProperty Name="Age" ParameterName="Age" Version="Current" />
+                  <ScalarProperty Name="Phone" ParameterName="Phone" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteMember" >
+                  <ScalarProperty Name="MemberId" ParameterName="MemberId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EFRecipesModel.Adult">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertMember" >
+                  <ScalarProperty Name="Age" ParameterName="Age" />
+                  <ScalarProperty Name="Phone" ParameterName="Phone" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="MemberId" ColumnName="MemberId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateMember" >
+                  <ScalarProperty Name="MemberId" ParameterName="MemberId" Version="Current" />
+                  <ScalarProperty Name="Age" ParameterName="Age" Version="Current" />
+                  <ScalarProperty Name="Phone" ParameterName="Phone" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteMember" >
+                  <ScalarProperty Name="MemberId" ParameterName="MemberId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EFRecipesModel.Senior">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertMember" >
+                  <ScalarProperty Name="Age" ParameterName="Age" />
+                  <ScalarProperty Name="Phone" ParameterName="Phone" />
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ResultBinding Name="MemberId" ColumnName="MemberId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateMember" >
+                  <ScalarProperty Name="MemberId" ParameterName="MemberId" Version="Current" />
+                  <ScalarProperty Name="Age" ParameterName="Age" Version="Current" />
+                  <ScalarProperty Name="Phone" ParameterName="Phone" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteMember" >
+                  <ScalarProperty Name="MemberId" ParameterName="MemberId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe12">
+        <EntityTypeShape EntityType="EFRecipesModel.Member" Width="1.5" PointX="3.5" PointY="1" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Teen" Width="1.5" PointX="1.625" PointY="3.25" Height="1.018779296875" />
+        <InheritanceConnector EntityType="EFRecipesModel.Teen" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.5" PointY="1.7291666666666665" />
+          <ConnectorPoint PointX="2.333333333333333" PointY="1.7291666666666665" />
+          <ConnectorPoint PointX="2.333333333333333" PointY="3.25" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.Adult" Width="1.5" PointX="3.5" PointY="3.25" Height="1.018779296875" />
+        <InheritanceConnector EntityType="EFRecipesModel.Adult" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="2.787985026041667" />
+          <ConnectorPoint PointX="4.25" PointY="3.25" /></InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.Senior" Width="1.5" PointX="5.375" PointY="3.25" Height="1.018779296875" />
+        <InheritanceConnector EntityType="EFRecipesModel.Senior" ManuallyRouted="false">
+          <ConnectorPoint PointX="5" PointY="1.7291666666666665" />
+          <ConnectorPoint PointX="6.114583333333333" PointY="1.7291666666666665" />
+          <ConnectorPoint PointX="6.114583333333333" PointY="3.25" />
+          </InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

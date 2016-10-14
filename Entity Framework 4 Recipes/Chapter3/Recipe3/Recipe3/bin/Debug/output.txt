@@ -1,0 +1,10 @@
+Customers...
+Robert Stevens's email is: rstevens@mymail.com
+Julia Kerns's email is: julia.kerns@abc.com
+Nancy Whitrock's email is: nrock@myworld.com
+
+Customers...
+Robert Stevens's email is: rstevens@mymail.com
+Julia Kerns's email is: julia.kerns@abc.com
+Nancy Whitrock's email is: nrock@myworld.com
+Press <enter> to continue...

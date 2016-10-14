@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Person" EntityType="EFRecipesModel.Store.Person" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_Person_Person" Association="EFRecipesModel.Store.FK_Person_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Person1" EntitySet="Person" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FireStation" Type="varchar" MaxLength="50" />
+          <Property Name="School" Type="varchar" MaxLength="50" />
+          <Property Name="FullTimeHobby" Type="varchar" MaxLength="50" />
+          <Property Name="Role" Type="char" MaxLength="1" />
+          <Property Name="HeroId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Person_Person">
+          <End Role="Person" Type="EFRecipesModel.Store.Person" Multiplicity="0..1" />
+          <End Role="Person1" Type="EFRecipesModel.Store.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Person1">
+              <PropertyRef Name="HeroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="People" EntityType="EFRecipesModel.Person" />
+          <AssociationSet Name="FK_Person_Person" Association="EFRecipesModel.FK_Person_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Person1" EntitySet="People" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person" Abstract="true">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="HeroId" Type="Int32" />
+          <NavigationProperty Name="Fans" Relationship="EFRecipesModel.FK_Person_Person" FromRole="Person" ToRole="Person1" />
+          <NavigationProperty Name="Hero" Relationship="EFRecipesModel.FK_Person_Person" FromRole="Person1" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Person_Person">
+          <End Role="Person" Type="EFRecipesModel.Person" Multiplicity="0..1" />
+          <End Role="Person1" Type="EFRecipesModel.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Person1">
+              <PropertyRef Name="HeroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Firefighter" BaseType="EFRecipesModel.Person" >
+          <Property Type="String" Name="FireStation" Nullable="true" MaxLength="50" FixedLength="false" Unicode="false" /></EntityType>
+        <EntityType Name="Teacher" BaseType="EFRecipesModel.Person" >
+          <Property Type="String" Name="School" Nullable="true" MaxLength="50" FixedLength="false" Unicode="false" /></EntityType>
+        <EntityType Name="Retired" BaseType="EFRecipesModel.Person" >
+          <Property Type="String" Name="FullTimeHobby" Nullable="true" MaxLength="50" FixedLength="false" Unicode="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Person)">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="HeroId" ColumnName="HeroId" />
+                <ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Firefighter)">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="FireStation" ColumnName="FireStation" />
+                <Condition ColumnName="Role" Value="f" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Teacher)">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <Condition ColumnName="Role" Value="t" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Retired)">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="FullTimeHobby" ColumnName="FullTimeHobby" />
+                <Condition ColumnName="Role" Value="r" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe4">
+        <EntityTypeShape EntityType="EFRecipesModel.Person" Width="1.5" PointX="3.875" PointY="2" Height="1.9802864583333339" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Person_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.4069230769230767" PointY="2" />
+          <ConnectorPoint PointX="4.4069230769230767" PointY="1.75" />
+          <ConnectorPoint PointX="4.8534615384615378" PointY="1.75" />
+          <ConnectorPoint PointX="4.8534615384615378" PointY="2" />
+          </AssociationConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.Firefighter" Width="1.5" PointX="6" PointY="3.125" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.Firefighter">
+          <ConnectorPoint PointX="5.375" PointY="3.5526432291666667" />
+          <ConnectorPoint PointX="6" PointY="3.5526432291666667" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.Teacher" Width="1.5" PointX="3.875" PointY="4.625" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.Teacher">
+          <ConnectorPoint PointX="4.625" PointY="3.9802864583333339" />
+          <ConnectorPoint PointX="4.625" PointY="4.625" /></InheritanceConnector>
+        <EntityTypeShape EntityType="EFRecipesModel.Retired" Width="1.5" PointX="1.875" PointY="3.125" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="EFRecipesModel.Retired">
+          <ConnectorPoint PointX="3.875" PointY="3.5526432291666667" />
+          <ConnectorPoint PointX="3.375" PointY="3.5526432291666667" /></InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="PictureCategory" EntityType="EFRecipesModel.Store.PictureCategory" store:Type="Tables" Schema="Chapter2" />
+          <AssociationSet Name="FK_PictureCategory_PictureCategory" Association="EFRecipesModel.Store.FK_PictureCategory_PictureCategory">
+            <End Role="PictureCategory" EntitySet="PictureCategory" />
+            <End Role="PictureCategory1" EntitySet="PictureCategory" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PictureCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ParentCategoryId" Type="int" />
+        </EntityType>
+        <Association Name="FK_PictureCategory_PictureCategory">
+          <End Role="PictureCategory" Type="EFRecipesModel.Store.PictureCategory" Multiplicity="0..1" />
+          <End Role="PictureCategory1" Type="EFRecipesModel.Store.PictureCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PictureCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="PictureCategory1">
+              <PropertyRef Name="ParentCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="PictureCategories" EntityType="EFRecipesModel.PictureCategory" />
+          <AssociationSet Name="FK_PictureCategory_PictureCategory" Association="EFRecipesModel.FK_PictureCategory_PictureCategory">
+            <End Role="PictureCategory" EntitySet="PictureCategories" />
+            <End Role="PictureCategory1" EntitySet="PictureCategories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PictureCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ParentCategoryId" Type="Int32" />
+          <NavigationProperty Name="Subcategories" Relationship="EFRecipesModel.FK_PictureCategory_PictureCategory" FromRole="PictureCategory" ToRole="PictureCategory1" />
+          <NavigationProperty Name="ParentCategory" Relationship="EFRecipesModel.FK_PictureCategory_PictureCategory" FromRole="PictureCategory1" ToRole="PictureCategory" />
+        </EntityType>
+        <Association Name="FK_PictureCategory_PictureCategory">
+          <End Role="PictureCategory" Type="EFRecipesModel.PictureCategory" Multiplicity="0..1" />
+          <End Role="PictureCategory1" Type="EFRecipesModel.PictureCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PictureCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="PictureCategory1">
+              <PropertyRef Name="ParentCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="PictureCategories"><EntityTypeMapping TypeName="EFRecipesModel.PictureCategory"><MappingFragment StoreEntitySet="PictureCategory">
+            <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="ParentCategoryId" ColumnName="ParentCategoryId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe5">
+        <EntityTypeShape EntityType="EFRecipesModel.PictureCategory" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_PictureCategory_PictureCategory" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.2819230769230767" PointY="2.7302864583333335" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="2.9802864583333335" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="2.9802864583333335" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="2.7302864583333335" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

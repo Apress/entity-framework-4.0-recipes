@@ -1,0 +1,9 @@
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\bin\EnrollmentService.dll
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\bin\EnrollmentService.pdb
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\bin\EnrollmentData.dll
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\bin\EnrollmentEntities.dll
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\bin\EnrollmentData.pdb
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\bin\EnrollmentEntities.pdb
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\obj\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\obj\Debug\EnrollmentService.dll
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentService\obj\Debug\EnrollmentService.pdb

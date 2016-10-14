@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Accident" EntityType="EFRecipesModel.Store.Accident" store:Type="Tables" Schema="Chapter3" />
+          <EntitySet Name="Worker" EntityType="EFRecipesModel.Store.Worker" store:Type="Tables" Schema="Chapter3" />
+          <AssociationSet Name="FK_Accident_Worker" Association="EFRecipesModel.Store.FK_Accident_Worker">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="Accident" EntitySet="Accident" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accident">
+          <Key>
+            <PropertyRef Name="AccidentId" />
+          </Key>
+          <Property Name="AccidentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Severity" Type="int" Nullable="false" />
+          <Property Name="WorkerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="WorkerId" />
+          </Key>
+          <Property Name="WorkerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Accident_Worker">
+          <End Role="Worker" Type="EFRecipesModel.Store.Worker" Multiplicity="1" />
+          <End Role="Accident" Type="EFRecipesModel.Store.Accident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="WorkerId" />
+            </Principal>
+            <Dependent Role="Accident">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accidents" EntityType="EFRecipesModel.Accident" />
+          <EntitySet Name="Workers" EntityType="EFRecipesModel.Worker" />
+          <AssociationSet Name="FK_Accident_Worker" Association="EFRecipesModel.FK_Accident_Worker">
+            <End Role="Worker" EntitySet="Workers" />
+            <End Role="Accident" EntitySet="Accidents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Accident">
+          <Key>
+            <PropertyRef Name="AccidentId" />
+          </Key>
+          <Property Name="AccidentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Severity" Type="Int32" Nullable="false" />
+          <Property Name="WorkerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Worker" Relationship="EFRecipesModel.FK_Accident_Worker" FromRole="Accident" ToRole="Worker" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="WorkerId" />
+          </Key>
+          <Property Name="WorkerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Accidents" Relationship="EFRecipesModel.FK_Accident_Worker" FromRole="Worker" ToRole="Accident" />
+        </EntityType>
+        <Association Name="FK_Accident_Worker">
+          <End Role="Worker" Type="EFRecipesModel.Worker" Multiplicity="1" />
+          <End Role="Accident" Type="EFRecipesModel.Accident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="WorkerId" />
+            </Principal>
+            <Dependent Role="Accident">
+              <PropertyRef Name="WorkerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Accidents"><EntityTypeMapping TypeName="EFRecipesModel.Accident"><MappingFragment StoreEntitySet="Accident">
+            <ScalarProperty Name="AccidentId" ColumnName="AccidentId" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+            <ScalarProperty Name="Severity" ColumnName="Severity" />
+            <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Workers"><EntityTypeMapping TypeName="EFRecipesModel.Worker"><MappingFragment StoreEntitySet="Worker">
+            <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe11">
+        <EntityTypeShape EntityType="EFRecipesModel.Accident" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Worker" Width="1.5" PointX="0.75" PointY="1.125" Height="1.5956835937500002" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Accident_Worker" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.9228417968750002" />
+          <ConnectorPoint PointX="3" PointY="1.9228417968750002" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,7 @@
+Order # 1, ordered on 1/18/2010
+SKU	Description	Qty	Price
+---	-----------	---	-----
+1729	Backpack	1	$29.97
+1847	Camp Stove	1	$43.99
+2929	Water Filter	3	$13.97
+Press <enter> to continue...

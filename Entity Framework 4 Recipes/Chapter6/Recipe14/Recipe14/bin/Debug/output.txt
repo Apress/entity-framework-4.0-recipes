@@ -1,0 +1,16 @@
+Active Invoice
+Description: Oil Change
+Amount: $19.95
+Date: 4/11/2010
+
+Active Invoice
+Description: Wheel Alignment
+Amount: $129.95
+Date: 4/1/2010
+
+Deleted Invoice
+Description: Engine Diagnosis
+Amount: $39.95
+Date: 4/1/2010
+
+Press <enter> to continue...

@@ -1,0 +1,6 @@
+All Employees
+=============
+Will Smith Hours = 39, Rate = $7.75/hour
+JoAnn Woodland Salary = $65,400.00
+Joel Clark Salary = $32,500.00, Commission = 20.00%
+Press <enter> to continue...

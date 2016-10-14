@@ -1,0 +1,10 @@
+Robert Meyers's UserName changing to RM, Too Short!
+Karen Kelley's UserName changing to KKelley, OK!
+Users saved to database
+
+Reading users from database
+Robert Meyers's UserName changing to RM, Too Short!
+Robert Meyers is Inactive, UserName is RM
+Karen Kelley's UserName changing to KKelley, OK!
+Karen Kelley is Active, UserName is KKelley
+Press <enter> to continue...

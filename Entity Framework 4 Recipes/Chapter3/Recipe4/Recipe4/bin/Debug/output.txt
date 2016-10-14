@@ -1,0 +1,8 @@
+Teachers...Using Object Services
+Janet Dietz is a professor
+Robert Kline is not a professor
+
+Teachers...Using EntityClient
+Janet Dietz is a professor
+Robert Kline is not a professor
+Press <enter> to continue...

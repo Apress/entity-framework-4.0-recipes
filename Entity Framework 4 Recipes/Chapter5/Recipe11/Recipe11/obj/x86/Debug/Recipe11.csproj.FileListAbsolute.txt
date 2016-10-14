@@ -1,0 +1,6 @@
+H:\Book Work\Code\Chapter5\Recipe11\Recipe11\bin\Debug\Recipe11.exe.config
+H:\Book Work\Code\Chapter5\Recipe11\Recipe11\bin\Debug\Recipe11.exe
+H:\Book Work\Code\Chapter5\Recipe11\Recipe11\bin\Debug\Recipe11.pdb
+H:\Book Work\Code\Chapter5\Recipe11\Recipe11\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter5\Recipe11\Recipe11\obj\x86\Debug\Recipe11.exe
+H:\Book Work\Code\Chapter5\Recipe11\Recipe11\obj\x86\Debug\Recipe11.pdb

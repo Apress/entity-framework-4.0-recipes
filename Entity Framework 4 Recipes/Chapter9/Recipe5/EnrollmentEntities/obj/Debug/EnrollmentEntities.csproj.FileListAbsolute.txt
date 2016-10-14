@@ -1,0 +1,5 @@
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentEntities\bin\Debug\EnrollmentEntities.dll
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentEntities\bin\Debug\EnrollmentEntities.pdb
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentEntities\obj\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentEntities\obj\Debug\EnrollmentEntities.dll
+H:\Book Work\Code\Chapter9\Recipe5\EnrollmentEntities\obj\Debug\EnrollmentEntities.pdb

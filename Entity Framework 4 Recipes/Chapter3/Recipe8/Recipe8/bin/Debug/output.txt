@@ -1,0 +1,7 @@
+Books (using LINQ)
+'F# In Practice' is in category: Programming
+'The Joy of SQL' is in category: Databases
+Books (using ESQL)
+'F# In Practice' is in category: Programming
+'The Joy of SQL' is in category: Databases
+Press <enter> to continue...

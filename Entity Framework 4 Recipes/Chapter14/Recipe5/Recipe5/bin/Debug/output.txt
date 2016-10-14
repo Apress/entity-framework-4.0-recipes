@@ -1,0 +1,6 @@
+Account for Robin Rosen
+	Previous Balance: $100.00
+[Rogue process updates balance!]
+	New Balance: $10.00
+Exception: Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. Refresh ObjectStateManager entries.
+Press <enter> to continue...

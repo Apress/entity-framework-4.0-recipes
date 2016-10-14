@@ -1,0 +1,8 @@
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\bin\Debug\BookingClient.exe.config
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\bin\Debug\BookingClient.exe
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\bin\Debug\BookingClient.pdb
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\bin\Debug\BookingEntities.dll
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\bin\Debug\BookingEntities.pdb
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\obj\x86\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\obj\x86\Debug\BookingClient.exe
+H:\Book Work\Code\Chapter9\Recipe6\BookingClient\obj\x86\Debug\BookingClient.pdb

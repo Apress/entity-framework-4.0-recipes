@@ -1,0 +1,6 @@
+Instructors and Students
+Instructor Karen Stanford makes $62,500.00/year
+Instructor Robert Morris makes $61,800.00/year
+Student Jill Mathers's major is Computer Science
+Student Steven Kennedy's major is Math
+Press <enter> to continue...

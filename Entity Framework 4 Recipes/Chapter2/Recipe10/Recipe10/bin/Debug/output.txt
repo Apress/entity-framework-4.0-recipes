@@ -1,0 +1,10 @@
+--- All Employees ---
+Jane Doe (Full Time)
+John Smith (Full Time)
+Tom Jones (Hourly)
+--- Full Time ---
+Jane Doe
+John Smith
+--- Hourly ---
+Tom Jones
+Press <enter> to continue...

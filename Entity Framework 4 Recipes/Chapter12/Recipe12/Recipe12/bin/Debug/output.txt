@@ -1,0 +1,6 @@
+OrderDate cannot be after the current date
+ShippedDate cannot be before OrderDate
+Order cannot be shipped unless it is Approved
+Orders over $5000 ship for free
+Shipped orders cannot be deleted
+Press <enter> to continue...

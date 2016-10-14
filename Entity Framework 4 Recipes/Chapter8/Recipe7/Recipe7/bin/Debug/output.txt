@@ -1,0 +1,8 @@
+talk1.Speaker is null: True
+talk1.Speaker is null: False
+Number of added entries tracked: 3
+talk1's state is: Unchanged
+talk1's state is: Modified
+Speaker: Karen Stanfield
+	Talk Title: AI with C# in 3 Easy Steps
+Press <enter> to continue...

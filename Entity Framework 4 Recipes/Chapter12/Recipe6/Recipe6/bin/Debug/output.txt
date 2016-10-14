@@ -1,0 +1,30 @@
+All the Related Entities...
+
+*** Chicken Risotto ***
+Ingredients
+	1 Cup White Rice
+	6 Cups Chicken Broth
+Steps
+	Bring Broth to a boil
+	Slowly add Broth to Rice
+
+*** Baked Chicken ***
+Ingredients
+	1 lb Chicken
+Steps
+	Bake at 350 for 35 Minutes
+
+After Related Entities are Deleted...
+
+*** Chicken Risotto ***
+Ingredients
+	1 Cup White Rice
+	6 Cups Chicken Broth
+Steps
+	Bring Broth to a boil
+	Slowly add Broth to Rice
+
+*** Baked Chicken ***
+Ingredients
+Steps
+Press <enter> to continue...

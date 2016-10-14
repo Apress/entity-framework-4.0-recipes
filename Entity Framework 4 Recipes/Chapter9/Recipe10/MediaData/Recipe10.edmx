@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Category" EntityType="EFRecipesModel.Store.Category" store:Type="Tables" Schema="chapter9" />
+          <EntitySet Name="Media" EntityType="EFRecipesModel.Store.Media" store:Type="Tables" Schema="chapter9" />
+          <EntitySet Name="MediaCategory" EntityType="EFRecipesModel.Store.MediaCategory" store:Type="Tables" Schema="chapter9" />
+          <EntitySet Name="MediaType" EntityType="EFRecipesModel.Store.MediaType" store:Type="Tables" Schema="chapter9" />
+          <AssociationSet Name="FK_Media_MediaType" Association="EFRecipesModel.Store.FK_Media_MediaType">
+            <End Role="MediaType" EntitySet="MediaType" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MediaCategory_Category" Association="EFRecipesModel.Store.FK_MediaCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="MediaCategory" EntitySet="MediaCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MediaCategory_Media" Association="EFRecipesModel.Store.FK_MediaCategory_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="MediaCategory" EntitySet="MediaCategory" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MediaTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="MediaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaType">
+          <Key>
+            <PropertyRef Name="MediaTypeId" />
+          </Key>
+          <Property Name="MediaTypeId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Media_MediaType">
+          <End Role="MediaType" Type="EFRecipesModel.Store.MediaType" Multiplicity="1" />
+          <End Role="Media" Type="EFRecipesModel.Store.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaType">
+              <PropertyRef Name="MediaTypeId" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="MediaTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MediaCategory_Category">
+          <End Role="Category" Type="EFRecipesModel.Store.Category" Multiplicity="1" />
+          <End Role="MediaCategory" Type="EFRecipesModel.Store.MediaCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="MediaCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MediaCategory_Media">
+          <End Role="Media" Type="EFRecipesModel.Store.Media" Multiplicity="1" />
+          <End Role="MediaCategory" Type="EFRecipesModel.Store.MediaCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="MediaCategory">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="EFRecipesModel.Category" />
+          <EntitySet Name="Media" EntityType="EFRecipesModel.Medium" />
+          <EntitySet Name="MediaTypes" EntityType="EFRecipesModel.MediaType" />
+          <AssociationSet Name="FK_Media_MediaType" Association="EFRecipesModel.FK_Media_MediaType">
+            <End Role="MediaType" EntitySet="MediaTypes" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="MediaCategory" Association="EFRecipesModel.MediaCategory">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Media" Relationship="EFRecipesModel.MediaCategory" FromRole="Category" ToRole="Media" />
+        </EntityType>
+        <EntityType Name="Medium">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MediaTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MediaType" Relationship="EFRecipesModel.FK_Media_MediaType" FromRole="Media" ToRole="MediaType" />
+          <NavigationProperty Name="Categories" Relationship="EFRecipesModel.MediaCategory" FromRole="Media" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="MediaType">
+          <Key>
+            <PropertyRef Name="MediaTypeId" />
+          </Key>
+          <Property Name="MediaTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Media" Relationship="EFRecipesModel.FK_Media_MediaType" FromRole="MediaType" ToRole="Media" />
+        </EntityType>
+        <Association Name="FK_Media_MediaType">
+          <End Role="MediaType" Type="EFRecipesModel.MediaType" Multiplicity="1" />
+          <End Role="Media" Type="EFRecipesModel.Medium" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaType">
+              <PropertyRef Name="MediaTypeId" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="MediaTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MediaCategory">
+          <End Role="Category" Type="EFRecipesModel.Category" Multiplicity="*" />
+          <End Role="Media" Type="EFRecipesModel.Medium" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="EFRecipesModel.Category"><MappingFragment StoreEntitySet="Category">
+            <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Media"><EntityTypeMapping TypeName="EFRecipesModel.Medium"><MappingFragment StoreEntitySet="Media">
+            <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="MediaTypeId" ColumnName="MediaTypeId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MediaTypes"><EntityTypeMapping TypeName="EFRecipesModel.MediaType"><MappingFragment StoreEntitySet="MediaType">
+            <ScalarProperty Name="MediaTypeId" ColumnName="MediaTypeId" />
+            <ScalarProperty Name="Description" ColumnName="Description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="MediaCategory" TypeName="EFRecipesModel.MediaCategory" StoreEntitySet="MediaCategory">
+            <EndProperty Name="Category">
+              <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+            </EndProperty>
+            <EndProperty Name="Media">
+              <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe10">
+        <EntityTypeShape EntityType="EFRecipesModel.Category" Width="1.5" PointX="0.75" PointY="1.125" Height="1.5956835937500002" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Medium" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.MediaType" Width="1.5" PointX="5.25" PointY="1.125" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="EFRecipesModel.FK_Media_MediaType" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="1.9228417968749998" />
+          <ConnectorPoint PointX="4.5" PointY="1.9228417968749998" />
+        </AssociationConnector>
+        <AssociationConnector Association="EFRecipesModel.MediaCategory" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.9228417968750002" />
+          <ConnectorPoint PointX="3" PointY="1.9228417968750002" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

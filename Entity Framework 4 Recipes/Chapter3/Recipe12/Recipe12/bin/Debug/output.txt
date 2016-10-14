@@ -1,0 +1,15 @@
+Top selling products sorted by rating
+	Prairie Home Dutch Oven [rating: 4]
+	Green River Tent [rating: 3]
+	QuickFire Fire Starter [rating: 2]
+
+Top selling products sorted by rating
+	Prairie Home Dutch Oven [rating: 4]
+	Green River Tent [rating: 3]
+	QuickFire Fire Starter [rating: 2]
+
+Top selling products sorted by rating
+	Prairie Home Dutch Oven [rating: 4]
+	Green River Tent [rating: 3]
+	QuickFire Fire Starter [rating: 2]
+Press <enter> to continue...

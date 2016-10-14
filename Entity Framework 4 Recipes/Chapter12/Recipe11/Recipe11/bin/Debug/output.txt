@@ -1,0 +1,21 @@
+Ticket: 5
+Date: 3/24/2010
+Amount: $132.00
+Paid: Not Paid
+
+Ticket: 6
+Date: 3/24/2010
+Amount: $255.00
+Paid: Not Paid
+
+Ticket: 5
+Date: 3/24/2010
+Amount: $132.00
+Paid: 3/24/2010
+
+Ticket: 6
+Date: 3/24/2010
+Amount: $255.00
+Paid: 3/24/2010
+
+Press <enter> to continue...

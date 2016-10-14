@@ -1,0 +1,5 @@
+H:\Book Work\Code\Chapter9\Recipe6\BookingEntities\bin\Debug\BookingEntities.dll
+H:\Book Work\Code\Chapter9\Recipe6\BookingEntities\bin\Debug\BookingEntities.pdb
+H:\Book Work\Code\Chapter9\Recipe6\BookingEntities\obj\Debug\ResolveAssemblyReference.cache
+H:\Book Work\Code\Chapter9\Recipe6\BookingEntities\obj\Debug\BookingEntities.dll
+H:\Book Work\Code\Chapter9\Recipe6\BookingEntities\obj\Debug\BookingEntities.pdb

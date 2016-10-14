@@ -1,0 +1,5 @@
+Orders for Karen Marlowe
+--Order Date: 4/19/2010--
+	Green Tea, 4 units at $1.00 each, unit discount: $0.09
+	Columbian Coffee, 3 units at $2.15 each, unit discount: $0.00
+Press <enter> to continue...

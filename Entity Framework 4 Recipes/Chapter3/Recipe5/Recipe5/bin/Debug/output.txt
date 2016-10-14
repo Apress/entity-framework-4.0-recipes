@@ -1,0 +1,12 @@
+Blog Posts with comments...(LINQ)
+Blog Post: The Joy of LINQ
+	Great post, I wish more people would talk about LINQ
+Blog Post: LINQ and our Children
+	You're right, we should teach LINQ in high school!
+
+Blog Posts with comments...(ESQL)
+Blog Post: The Joy of LINQ
+	Great post, I wish more people would talk about LINQ
+Blog Post: LINQ and our Children
+	You're right, we should teach LINQ in high school!
+Press <enter> to continue...

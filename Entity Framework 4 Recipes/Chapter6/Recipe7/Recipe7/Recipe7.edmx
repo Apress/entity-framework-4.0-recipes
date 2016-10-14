@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Instructor" EntityType="EFRecipesModel.Store.Instructor" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Principal" EntityType="EFRecipesModel.Store.Principal" store:Type="Tables" Schema="Chapter6" />
+          <EntitySet Name="Staff" EntityType="EFRecipesModel.Store.Staff" store:Type="Tables" Schema="Chapter6" />
+          <AssociationSet Name="FK_Instructor_Staff" Association="EFRecipesModel.Store.FK_Instructor_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Instructor" EntitySet="Instructor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Staff" Association="EFRecipesModel.Store.FK_Principal_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Principal" EntitySet="Principal" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="InstructorId" />
+          </Key>
+          <Property Name="InstructorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Salary" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="StaffId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Principal">
+          <Key>
+            <PropertyRef Name="PrincipalId" />
+          </Key>
+          <Property Name="PrincipalId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Salary" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="Bonus" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="StaffId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Name="StaffId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Instructor_Staff">
+          <End Role="Staff" Type="EFRecipesModel.Store.Staff" Multiplicity="1" />
+          <End Role="Instructor" Type="EFRecipesModel.Store.Instructor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffId" />
+            </Principal>
+            <Dependent Role="Instructor">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Staff">
+          <End Role="Staff" Type="EFRecipesModel.Store.Staff" Multiplicity="1" />
+          <End Role="Principal" Type="EFRecipesModel.Store.Principal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffId" />
+            </Principal>
+            <Dependent Role="Principal">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteInstructor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="StaffId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeletePrincipal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="StaffId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertInstructor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Salary" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="InsertPrincipal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Salary" Type="decimal" Mode="In" />
+          <Parameter Name="Bonus" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="UpdateInstructor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Salary" Type="decimal" Mode="In" />
+          <Parameter Name="StaffId" Type="int" Mode="In" />
+          <Parameter Name="InstructorId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdatePrincipal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Chapter6">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Salary" Type="decimal" Mode="In" />
+          <Parameter Name="Bonus" Type="decimal" Mode="In" />
+          <Parameter Name="StaffId" Type="int" Mode="In" />
+          <Parameter Name="PrincipalId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Staffs" EntityType="EFRecipesModel.Staff" />
+        </EntityContainer>
+        <EntityType Name="Instructor" BaseType="EFRecipesModel.Staff">
+          <Property Name="InstructorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Salary" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Principal" BaseType="EFRecipesModel.Staff">
+          <Property Name="PrincipalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Salary" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Bonus" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Staff" Abstract="true">
+          <Key>
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Name="StaffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Staffs">
+            <QueryView>
+              select value
+              case
+              when (i.StaffId is not null) then
+              EFRecipesModel.Instructor(s.StaffId,s.Name,i.InstructorId,i.Salary)
+              when (p.StaffId is not null) then
+              EFRecipesModel.Principal(s.StaffId,s.Name,p.PrincipalId,p.Salary,p.Bonus)
+              END
+              from EFRecipesModelStoreContainer.Staff as s
+              left join EFRecipesModelStoreContainer.Instructor as i
+              on s.StaffId = i.StaffId
+              left join EFRecipesModelStoreContainer.Principal as p
+              on s.StaffId = p.StaffId
+            </QueryView>
+            <EntityTypeMapping TypeName="EFRecipesModel.Principal">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertPrincipal">
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ScalarProperty Name="Bonus" ParameterName="Bonus" />
+                  <ScalarProperty Name="Salary" ParameterName="Salary" />
+                  <ResultBinding Name="StaffId" ColumnName="StaffId" />
+                  <ResultBinding Name="PrincipalId" ColumnName="PrincipalId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdatePrincipal">
+                  <ScalarProperty Name="StaffId" ParameterName="StaffId" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="PrincipalId" ParameterName="PrincipalId" Version="Current" />
+                  <ScalarProperty Name="Bonus" ParameterName="Bonus" Version="Current" />
+                  <ScalarProperty Name="Salary" ParameterName="Salary" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeletePrincipal" >
+                  <ScalarProperty Name="StaffId" ParameterName="StaffId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping>
+            <EntityTypeMapping TypeName="EFRecipesModel.Instructor">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="EFRecipesModel.Store.InsertInstructor">
+                  <ScalarProperty Name="Name" ParameterName="Name" />
+                  <ScalarProperty Name="Salary" ParameterName="Salary" />
+                  <ResultBinding Name="StaffId" ColumnName="StaffId" />
+                  <ResultBinding Name="InstructorId" ColumnName="InstructorId" /></InsertFunction>
+                <UpdateFunction FunctionName="EFRecipesModel.Store.UpdateInstructor">
+                  <ScalarProperty Name="StaffId" ParameterName="StaffId" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+                  <ScalarProperty Name="InstructorId" ParameterName="InstructorId" Version="Current" />
+                  <ScalarProperty Name="Salary" ParameterName="Salary" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="EFRecipesModel.Store.DeleteInstructor" >
+                  <ScalarProperty Name="StaffId" ParameterName="StaffId" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe7">
+        <EntityTypeShape EntityType="EFRecipesModel.Instructor" Width="1.5" PointX="5.125" PointY="3.625" Height="1.4033821614583326" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Principal" Width="1.5" PointX="3" PointY="3.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Staff" Width="1.5" PointX="4" PointY="1.25" Height="1.4033821614583331" IsExpanded="true" />
+        <InheritanceConnector EntityType="EFRecipesModel.Principal">
+          <ConnectorPoint PointX="4.458333333333333" PointY="2.6533821614583331" />
+          <ConnectorPoint PointX="4.458333333333333" PointY="3.25" />
+          <ConnectorPoint PointX="3.75" PointY="3.25" />
+          <ConnectorPoint PointX="3.75" PointY="3.625" /></InheritanceConnector>
+        <InheritanceConnector EntityType="EFRecipesModel.Instructor">
+          <ConnectorPoint PointX="5.09375" PointY="2.6533821614583331" />
+          <ConnectorPoint PointX="5.09375" PointY="3.25" />
+          <ConnectorPoint PointX="5.875" PointY="3.25" />
+          <ConnectorPoint PointX="5.875" PointY="3.625" /></InheritanceConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

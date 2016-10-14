@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Account" EntityType="EFRecipesModel.Store.Account" store:Type="Tables" Schema="Chapter15" />
+          <EntitySet Name="Contact" EntityType="EFRecipesModel.Store.Contact" store:Type="Tables" Schema="Chapter15" />
+          <AssociationSet Name="FK_Contact_Account" Association="EFRecipesModel.Store.FK_Contact_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Contact" EntitySet="Contact" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Balance" Type="decimal" Nullable="false" Scale="2" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="AccountId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Contact_Account">
+          <End Role="Account" Type="EFRecipesModel.Store.Account" Multiplicity="0..1" />
+          <End Role="Contact" Type="EFRecipesModel.Store.Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities">
+          <EntitySet Name="Accounts" EntityType="EFRecipesModel.Account" />
+          <EntitySet Name="Contacts" EntityType="EFRecipesModel.Contact" />
+          <AssociationSet Name="CustomerAccount" Association="EFRecipesModel.CustomerAccount">
+            <End Role="Customer" EntitySet="Contacts" />
+            <End Role="Account" EntitySet="Accounts" /></AssociationSet></EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Balance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Customer" Relationship="EFRecipesModel.CustomerAccount" FromRole="Account" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Customer" BaseType="EFRecipesModel.Contact" >
+          <Property Type="Int32" Name="AccountId" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="EFRecipesModel.CustomerAccount" FromRole="Customer" ToRole="Account" /></EntityType>
+        <Association Name="CustomerAccount">
+          <End Type="EFRecipesModel.Customer" Role="Customer" Multiplicity="*" />
+          <End Type="EFRecipesModel.Account" Role="Account" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" /></Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="AccountId" /></Dependent></ReferentialConstraint></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="Accounts"><EntityTypeMapping TypeName="EFRecipesModel.Account"><MappingFragment StoreEntitySet="Account">
+            <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+            <ScalarProperty Name="Balance" ColumnName="Balance" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Customer)">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <Condition ColumnName="AccountId" IsNull="false" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Contact)">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Recipe1">
+        <EntityTypeShape EntityType="EFRecipesModel.Account" Width="1.5" PointX="5.375" PointY="5" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Contact" Width="1.5" PointX="3" PointY="2.875" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFRecipesModel.Customer" Width="1.5" PointX="3" PointY="5" Height="1.018779296875" />
+        <InheritanceConnector EntityType="EFRecipesModel.Customer" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.75" PointY="4.47068359375" />
+          <ConnectorPoint PointX="3.75" PointY="5" /></InheritanceConnector>
+        <AssociationConnector Association="EFRecipesModel.CustomerAccount">
+          <ConnectorPoint PointX="4.5" PointY="5.6055403645833337" />
+          <ConnectorPoint PointX="5.375" PointY="5.6055403645833337" /></AssociationConnector></Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

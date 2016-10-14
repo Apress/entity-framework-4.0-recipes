@@ -1,0 +1,5 @@
+Appointments for Thursday
+=========================
+Appointment from 9:00 AM to 11:00 AM
+Appointment from 1:00 PM to 3:00 PM
+Press <enter> to continue...

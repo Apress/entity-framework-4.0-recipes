@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recipe9", "Recipe9\Recipe9.csproj", "{5FBA594A-6EF0-4242-BF76-8B5E65F586CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FBA594A-6EF0-4242-BF76-8B5E65F586CB}.Debug|x86.ActiveCfg = Debug|x86
+		{5FBA594A-6EF0-4242-BF76-8B5E65F586CB}.Debug|x86.Build.0 = Debug|x86
+		{5FBA594A-6EF0-4242-BF76-8B5E65F586CB}.Release|x86.ActiveCfg = Release|x86
+		{5FBA594A-6EF0-4242-BF76-8B5E65F586CB}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

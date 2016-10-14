@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EFRecipesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFRecipesModelStoreContainer">
+          <EntitySet Name="Lawyer" EntityType="EFRecipesModel.Store.Lawyer" store:Type="Tables" Schema="Chapter3" />
+          <EntitySet Name="Person" EntityType="EFRecipesModel.Store.Person" store:Type="Tables" Schema="Chapter3" />
+          <EntitySet Name="Teacher" EntityType="EFRecipesModel.Store.Teacher" store:Type="Tables" Schema="Chapter3" />
+          <AssociationSet Name="FK_Lawyer_Person" Association="EFRecipesModel.Store.FK_Lawyer_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Lawyer" EntitySet="Lawyer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Person" Association="EFRecipesModel.Store.FK_Teacher_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Lawyer">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="Cases" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="IsProfessor" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Lawyer_Person">
+          <End Role="Person" Type="EFRecipesModel.Store.Person" Multiplicity="1" />
+          <End Role="Lawyer" Type="EFRecipesModel.Store.Lawyer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Lawyer">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Person">
+          <End Role="Person" Type="EFRecipesModel.Store.Person" Multiplicity="1" />
+          <End Role="Teacher" Type="EFRecipesModel.Store.Teacher" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFRecipesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="EFRecipesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="People" EntityType="EFRecipesModel.Person" />
+        </EntityContainer>
+        <EntityType Name="Lawyer" BaseType="EFRecipesModel.Person">
+          <Property Name="Cases" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher" BaseType="EFRecipesModel.Person">
+          <Property Name="IsProfessor" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFRecipesModelStoreContainer" CdmEntityContainer="EFRecipesEntities">
+          <EntitySetMapping Name="People">
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Person)">
+<MappingFragment StoreEntitySet="Person">
+<ScalarProperty Name="PersonId" ColumnName="PersonId" />
+<ScalarProperty Name="Name" ColumnName="Name" /></MappingFragment></EntityTypeMapping>
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Lawyer)">
+<MappingFragment StoreEntitySet="Lawyer">
+<ScalarProperty Name="PersonId" ColumnName="PersonId" />
+<ScalarProperty Name="Cases" ColumnName="Cases" />
+</MappingFragment></EntityTypeMapping>
+<EntityTypeMapping TypeName="IsTypeOf(EFRecipesModel.Teacher)">
+<MappingFragment StoreEntitySet="Teacher">
+<ScalarProperty Name="PersonId" ColumnName="PersonId" />
+<ScalarProperty Name="IsProfessor" ColumnName="IsProfessor" />
+</MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+<Diagram Name="Recipe4">
+<EntityTypeShape EntityType="EFRecipesModel.Lawyer" Width="1.5" PointX="5" PointY="3.375" Height="1.2110807291666665" IsExpanded="true" />
+<EntityTypeShape EntityType="EFRecipesModel.Person" Width="1.5" PointX="3.875" PointY="0.75" Height="1.7879850260416665" IsExpanded="true" />
+<EntityTypeShape EntityType="EFRecipesModel.Teacher" Width="1.5" PointX="3" PointY="3.375" Height="1.2110807291666665" IsExpanded="true" />
+<InheritanceConnector EntityType="EFRecipesModel.Lawyer">
+<ConnectorPoint PointX="4.625" PointY="2.1533821614583331" />
+<ConnectorPoint PointX="4.625" PointY="3" />
+<ConnectorPoint PointX="5.75" PointY="3" />
+<ConnectorPoint PointX="5.75" PointY="3.375" /></InheritanceConnector>
+<InheritanceConnector EntityType="EFRecipesModel.Teacher">
+<ConnectorPoint PointX="4.625" PointY="2.1533821614583331" />
+<ConnectorPoint PointX="4.625" PointY="3" />
+<ConnectorPoint PointX="3.75" PointY="3" />
+<ConnectorPoint PointX="3.75" PointY="3.375" /></InheritanceConnector>
+</Diagram></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,5 @@
+Customers that are Sales Managers at GoShopNow.com
+Customer: Orin Torrey
+Customer: Robert Lancaster
+Customer: Julie Stevens
+Press <enter> to continue...

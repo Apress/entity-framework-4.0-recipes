@@ -1,0 +1,10 @@
+Employees (using LINQ)
+Robin Rosen, years worked: 3
+John Hancock, years worked: 0
+Employees (using ESQL)
+Robin Rosen, years worked: 3
+John Hancock, years worked: 0
+Employees (using ESQL w/named constructor)
+Robin Rosen, years worked: 3
+John Hancock, years worked: 0
+Press <enter> to continue...

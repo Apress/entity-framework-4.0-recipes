@@ -1,0 +1,5 @@
+John K. Smith, Phone: 824-3031
+Robert Allen Doe, Phone: 867-5309
+Kathy Anne Ryan, Phone: 722-0038
+Billy Albert Minor, Phone: 907-2212
+Press <enter> to continue...

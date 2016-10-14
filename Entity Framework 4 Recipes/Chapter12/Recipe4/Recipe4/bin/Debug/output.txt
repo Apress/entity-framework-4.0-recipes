@@ -1,0 +1,10 @@
+New total = $59.85
+New total = $119.80
+New total = $129.70
+Qty changed, total = $89.80
+Cart Total = $89.80
+New total = $89.80
+	SKU = AMM-223, Qty = 1, Unit Price = $19.95
+	SKU = CAMP-12, Qty = 1, Unit Price = $59.95
+	SKU = 29292, Qty = 2, Unit Price = $4.95
+Press <enter> to continue...

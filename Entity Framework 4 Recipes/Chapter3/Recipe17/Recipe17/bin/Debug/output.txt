@@ -1,0 +1,22 @@
+Using LINQ
+Events by State and City...
+Louisville, KY
+	Thunder on the Ohio
+Raytown, MO
+	Little Blue River Festival
+	Fourth of July Fireworks
+Dallas, TX
+	TechFest 2010
+	BBQ Ribs Championship
+
+Using Entity SQL
+Events by State and City...
+Louisville, KY
+	Thunder on the Ohio
+Raytown, MO
+	Little Blue River Festival
+	Fourth of July Fireworks
+Dallas, TX
+	TechFest 2010
+	BBQ Ribs Championship
+Press <enter> to continue...

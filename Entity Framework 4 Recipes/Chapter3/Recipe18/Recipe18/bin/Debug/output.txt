@@ -1,0 +1,12 @@
+Using LINQ...
+Patrons who contribute money
+	Jill Roberts
+	Ryan Keyes
+	Steven King
+
+Using Entity SQL...
+Patrons who contribute money
+	Jill Roberts
+	Ryan Keyes
+	Steven King
+Press <enter> to continue...
